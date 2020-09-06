@@ -17,6 +17,8 @@
 		30A931BD25050EF00098D51D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931BC25050EF00098D51D /* Weather.swift */; };
 		30A931C02505104B0098D51D /* ListWeathersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931BF2505104B0098D51D /* ListWeathersPresenter.swift */; };
 		30A931C2250511DD0098D51D /* ListWeathersWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931C1250511DD0098D51D /* ListWeathersWorker.swift */; };
+		30A931CC250519950098D51D /* ManagedWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931CB250519950098D51D /* ManagedWeather.swift */; };
+		30A931CE250519AE0098D51D /* ManagedForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931CD250519AE0098D51D /* ManagedForecast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		30A931BC25050EF00098D51D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		30A931BF2505104B0098D51D /* ListWeathersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWeathersPresenter.swift; sourceTree = "<group>"; };
 		30A931C1250511DD0098D51D /* ListWeathersWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWeathersWorker.swift; sourceTree = "<group>"; };
+		30A931CB250519950098D51D /* ManagedWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedWeather.swift; sourceTree = "<group>"; };
+		30A931CD250519AE0098D51D /* ManagedForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedForecast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				30A931BC25050EF00098D51D /* Weather.swift */,
+				30A931CB250519950098D51D /* ManagedWeather.swift */,
+				30A931CD250519AE0098D51D /* ManagedForecast.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -173,7 +179,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30A931CE250519AE0098D51D /* ManagedForecast.swift in Sources */,
 				30A931AC25050B0F0098D51D /* CleanWeather.xcdatamodeld in Sources */,
+				30A931CC250519950098D51D /* ManagedWeather.swift in Sources */,
 				30A931A625050B0F0098D51D /* ListWeathersViewController.swift in Sources */,
 				30A931A225050B0F0098D51D /* AppDelegate.swift in Sources */,
 				30A931BB25050E750098D51D /* ListWeathersInteractor.swift in Sources */,
@@ -317,6 +325,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UM9B77K58H;
 				INFOPLIST_FILE = CleanWeather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -334,6 +343,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UM9B77K58H;
 				INFOPLIST_FILE = CleanWeather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
