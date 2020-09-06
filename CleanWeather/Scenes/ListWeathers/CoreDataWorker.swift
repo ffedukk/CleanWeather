@@ -6,8 +6,9 @@
 //  Copyright © 2020 18592232. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class ListWeathersWorker {
+class CoreDataWorker {
     
+    let coreDataManager = (UIApplication.shared.delegate as? AppDelegate)?.coreDataManager
 }

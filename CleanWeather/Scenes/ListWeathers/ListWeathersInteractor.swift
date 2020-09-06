@@ -21,6 +21,9 @@ protocol ListWeathersDataStore
 class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore {
     
     var presenter: ListWeathersPresentationLogic?
+    var networkWorker = NetworkWorker()
+    var coreDataWorker = CoreDataWorker()
+    
     
     func fetchWeathers() {
         
