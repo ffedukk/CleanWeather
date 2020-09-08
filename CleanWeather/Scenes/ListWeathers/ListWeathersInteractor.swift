@@ -54,7 +54,7 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
     func updateWeathers() {
         guard let _ = weathers else { return }
         
-        for index in 0..<weathers!.count {
+        for index in 1..<weathers!.count {
             
             let place = weathers![index].placeName
             let weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=\(place)&appid=\(weatherAPIKey)"
@@ -112,6 +112,8 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
         }
     }
     
+//    MARK: Updating Location
+    
     func addWeatherInLocation(latitude: String, longitude: String) {
         print(latitude, longitude)
         
@@ -147,11 +149,8 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
 //    MARK: Init
     
     init() {
-        if let keys = PlistAccess().getPlist(withName: "APIKeys") {
-            weatherAPIKey = keys["WeatherAPIKey"]!
-        } else {
-            weatherAPIKey = ""
-        }
+        guard let keys = PlistAccess().getPlist(withName: "APIKeys") else { fatalError("Cannot read API KEY from plist") }
+        weatherAPIKey = keys["WeatherAPIKey"]!
         locationWorker.interactor = self
     }
 }
