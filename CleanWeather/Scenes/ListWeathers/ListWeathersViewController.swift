@@ -65,6 +65,7 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     func displayFetchedWeathers(viewModel: ListWeathers.FetchWeathers.ViewModel) {
         displayedWeathers = viewModel.displayedWeathers
         print(displayedWeathers.count)
+        print(displayedWeathers)
     }
 
 }

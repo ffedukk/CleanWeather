@@ -28,6 +28,7 @@
 		30A931DF250530D40098D51D /* JSONForecastParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931DE250530D40098D51D /* JSONForecastParser.swift */; };
 		30A931E2250533660098D51D /* PlistAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931E1250533660098D51D /* PlistAccess.swift */; };
 		30A931E42507A9920098D51D /* ListWeathersModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931E32507A9920098D51D /* ListWeathersModels.swift */; };
+		30A931E62507F43A0098D51D /* LocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931E52507F43A0098D51D /* LocationWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		30A931DE250530D40098D51D /* JSONForecastParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONForecastParser.swift; sourceTree = "<group>"; };
 		30A931E1250533660098D51D /* PlistAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistAccess.swift; sourceTree = "<group>"; };
 		30A931E32507A9920098D51D /* ListWeathersModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWeathersModels.swift; sourceTree = "<group>"; };
+		30A931E52507F43A0098D51D /* LocationWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				30A931E32507A9920098D51D /* ListWeathersModels.swift */,
 				30A931C1250511DD0098D51D /* CoreDataWorker.swift */,
 				30A931CF25051E4F0098D51D /* NetworkWorker.swift */,
+				30A931E52507F43A0098D51D /* LocationWorker.swift */,
 			);
 			path = ListWeathers;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				30A931D325051EC80098D51D /* CoreDataManager.swift in Sources */,
 				30A931DD25052DA10098D51D /* ParserProtocol.swift in Sources */,
 				30A931D025051E4F0098D51D /* NetworkWorker.swift in Sources */,
+				30A931E62507F43A0098D51D /* LocationWorker.swift in Sources */,
 				30A931C2250511DD0098D51D /* CoreDataWorker.swift in Sources */,
 				30A931BD25050EF00098D51D /* Weather.swift in Sources */,
 				30A931C02505104B0098D51D /* ListWeathersPresenter.swift in Sources */,

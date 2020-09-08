@@ -23,17 +23,24 @@ protocol ListWeathersDataStore
     var weathers: [Weather]? { get }
 }
 
+protocol ListWeatherLocation: class {
+    func addWeatherInLocation(latitude: String, longitude: String)
+}
+
 //    MARK: Interactor
 
-class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore {
+class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, ListWeatherLocation {
     
     var presenter: ListWeathersPresentationLogic?
     var networkWorker = NetworkWorker()
     var coreDataWorker = CoreDataWorker()
+    var locationWorker = LocationWorker()
     
     var weathers: [Weather]?
     
     let weatherAPIKey: String
+    
+//    MARK: Deletion
     
     func deleteWeather(at index: Int) {
         coreDataWorker.deleteFromData(at: index) {
@@ -105,6 +112,38 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore {
         }
     }
     
+    func addWeatherInLocation(latitude: String, longitude: String) {
+        print(latitude, longitude)
+        
+        let weatherURL = "http://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(weatherAPIKey)"
+        let forecastURL = "http://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&appid=\(weatherAPIKey)"
+        
+        networkWorker.getWeatherData(weatherURL: weatherURL, forecastURL: forecastURL) { [weak self] (weatherData, forecastData) in
+            guard let self = self else { return }
+            
+            if let _ = self.weathers {
+                if self.weathers!.isEmpty {
+                    self.coreDataWorker.add(weatherData: weatherData, forecastData: forecastData) { [weak self] (managedWeather) in
+                        if let newWeather = Weather(with: managedWeather) {
+                            guard let self = self else { return }
+                            self.weathers!.append(newWeather)
+                            self.presenter?.presentFetchedWeathers(weathers: self.weathers!)
+                        }
+                    }
+                } else {
+                    self.coreDataWorker.updateItem(weatherData: weatherData, forecastData: forecastData, at: 0) { [weak self] (managedWeather) in
+                        guard let self = self else { return }
+                        if let updatedWeather = Weather(with: managedWeather) {
+                            self.weathers![0] = updatedWeather
+                            self.presenter?.presentFetchedWeathers(weathers: self.weathers!)
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    
 //    MARK: Init
     
     init() {
@@ -113,5 +152,6 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore {
         } else {
             weatherAPIKey = ""
         }
+        locationWorker.interactor = self
     }
 }
