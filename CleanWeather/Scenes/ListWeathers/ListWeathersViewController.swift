@@ -8,17 +8,21 @@
 
 import UIKit
 
+//    MARK: Protocols
+
 protocol ListWeathersDisplayLogic: class
 {
     func displayFetchedWeathers(viewModel: ListWeathers.FetchWeathers.ViewModel)//viewModel: ListOrders.FetchOrders.ViewModel)
 }
 
+//    MARK: Controller
+
 class ListWeathersViewController: UICollectionViewController, ListWeathersDisplayLogic {
     
     var interactor: ListWeathersBusinessLogic?
     
-    var displayedWeathers: [ListWeathers.FetchWeathers.ViewModel.DisplayedWeather] = []
-    
+//    MARK: Init
+
     override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)
         setup()
@@ -27,6 +31,8 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+//    MARK: Setup
     
     private func setup() {
       let viewController = self
@@ -41,6 +47,8 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
       //router.dataStore = interactor
     }
     
+//    MARK: Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.fetchWeathersFromCoreData()
@@ -49,6 +57,10 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
         interactor?.updateWeathers()
         
     }
+    
+//    MARK: Display
+    
+    var displayedWeathers: [ListWeathers.FetchWeathers.ViewModel.DisplayedWeather] = []
     
     func displayFetchedWeathers(viewModel: ListWeathers.FetchWeathers.ViewModel) {
         displayedWeathers = viewModel.displayedWeathers

@@ -8,10 +8,14 @@
 
 import UIKit
 
+//    MARK: Protocols
+
 protocol ListWeathersPresentationLogic
 {
     func presentFetchedWeathers(weathers: [Weather])//response: ListOrders.FetchOrders.Response)
 }
+
+//    MARK: Presenter
 
 class ListWeathersPresenter: ListWeathersPresentationLogic {
     
@@ -58,10 +62,7 @@ class ListWeathersPresenter: ListWeathersPresentationLogic {
     }
     
     
-    
-    
-    
-    
+//    MARK: Format Functions
     
     private func fromKelvinToCelcius(kelvin: Double) -> String {
         let celcius = Int(kelvin - 273.15)

@@ -8,6 +8,8 @@
 
 import UIKit
 
+//    MARK: Protocols
+
 protocol ListWeathersBusinessLogic
 {
     func fetchWeathersFromCoreData()
@@ -20,6 +22,8 @@ protocol ListWeathersDataStore
 {
     var weathers: [Weather]? { get }
 }
+
+//    MARK: Interactor
 
 class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore {
     
@@ -37,6 +41,8 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore {
             presenter?.presentFetchedWeathers(weathers: weathers!)
         }
     }
+    
+//    MARK: Updating
         
     func updateWeathers() {
         guard let _ = weathers else { return }
@@ -59,6 +65,8 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore {
         presenter?.presentFetchedWeathers(weathers: weathers!)
     }
     
+//    MARK: Fetching
+    
     func fetchWeathersFromCoreData() {
         coreDataWorker.fetch { [weak self] (managedWeathers) in
             guard let self = self else { return }
@@ -73,7 +81,7 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore {
         }
     }
 
-    
+//    MARK: Adding
     
     func addWeather(place: String) {
         let weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=\(place)&appid=\(weatherAPIKey)"
@@ -97,7 +105,7 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore {
         }
     }
     
-    
+//    MARK: Init
     
     init() {
         if let keys = PlistAccess().getPlist(withName: "APIKeys") {

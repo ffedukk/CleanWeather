@@ -15,6 +15,8 @@ class CoreDataWorker {
     
     var managedObjects: [NSManagedObject] = []
     
+//    MARK: Adding
+    
     func add(weatherData: [String:Any], forecastData: [[String:Any]], completion: @escaping (ManagedWeather) -> ()) {
         guard let coreDataManager = coreDataManager else { return }
         
@@ -31,6 +33,8 @@ class CoreDataWorker {
         
         completion(newWeather)
     }
+    
+//    MARK: Fetching
     
     func fetch(completion: ([ManagedWeather]) -> ()) {
         guard let coreDataManager = coreDataManager else { return }
@@ -59,6 +63,8 @@ class CoreDataWorker {
         
     }
     
+//    MARK: Deletion
+    
     func deleteFromData(at index: Int, completion: () -> ()) {
         guard let coreDataManager = coreDataManager else { return }
 
@@ -66,6 +72,8 @@ class CoreDataWorker {
         coreDataManager.saveContext()
         completion()
     }
+    
+//    MARK: Update
     
     func updateItem(weatherData: [String:Any], forecastData: [[String:Any]], at index: Int, completion: (ManagedWeather) -> ()) {
         guard let coreDataManager = coreDataManager else { return }
