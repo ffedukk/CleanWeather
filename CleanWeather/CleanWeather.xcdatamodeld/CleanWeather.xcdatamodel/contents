@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G2021" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ManagedForecast" representedClassName="ManagedForecast" syncable="YES">
         <attribute name="icon" optional="YES" attributeType="String"/>
-        <attribute name="temperature" optional="YES" attributeType="String"/>
+        <attribute name="temperature" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="time" optional="YES" attributeType="String"/>
         <relationship name="managedWeather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedWeather" inverseName="managedForecast" inverseEntity="ManagedWeather"/>
     </entity>
@@ -18,7 +18,7 @@
         <attribute name="temperatureMin" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="weatherDescription" optional="YES" attributeType="String"/>
         <attribute name="windSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="managedForecast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedForecast" inverseName="managedWeather" inverseEntity="ManagedForecast"/>
+        <relationship name="managedForecast" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ManagedForecast" inverseName="managedWeather" inverseEntity="ManagedForecast"/>
     </entity>
     <elements>
         <element name="ManagedWeather" positionX="-63" positionY="-18" width="128" height="223"/>

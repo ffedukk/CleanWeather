@@ -7,8 +7,72 @@
 //
 
 import UIKit
+import CoreData
 
 class CoreDataWorker {
     
-    let coreDataManager = (UIApplication.shared.delegate as? AppDelegate)?.coreDataManager
+    weak var coreDataManager = (UIApplication.shared.delegate as! AppDelegate).coreDataManager
+    
+    var managedObjects: [NSManagedObject] = []
+    
+    func add(weatherData: [String:Any], forecastData: [[String:Any]], completion: @escaping (ManagedWeather) -> ()) {
+        guard let coreDataManager = coreDataManager else { return }
+        
+//        if townsNames.contains(weatherData["name"] as! String) {
+//            return
+//        } else {
+//            townsNames.append(weatherData["name"] as! String)
+//        }
+        
+        let newWeather = ManagedWeather.create(weatherData: weatherData, forecastData: forecastData, managedContext: coreDataManager.persistentContainer.viewContext)
+        //print(coreDataManager.persistentContainer.persistentStoreDescriptions.first?.url)
+        managedObjects.append(newWeather)
+        coreDataManager.saveContext()
+        
+        completion(newWeather)
+    }
+    
+    func fetch(completion: ([ManagedWeather]) -> ()) {
+        guard let coreDataManager = coreDataManager else { return }
+        
+        let fetchRequestWeather = NSFetchRequest<NSManagedObject>(entityName: "ManagedWeather")
+        var fetchedList: [NSManagedObject] = []
+        var managedWeathers: [ManagedWeather] = []
+        
+        do {
+            fetchedList = try coreDataManager.persistentContainer.viewContext.fetch(fetchRequestWeather)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        managedObjects = fetchedList
+        for managedObject in fetchedList {
+            managedWeathers.append(managedObject as! ManagedWeather)
+        }
+        
+        completion(managedWeathers)
+//        weathers = fetchedList
+        
+//        townsNames.removeAll()
+//        for weather in weathers {
+//            townsNames.append((weather as! Weather).townName!)
+//        }
+        
+    }
+    
+    func deleteFromData(at index: Int, completion: () -> ()) {
+        guard let coreDataManager = coreDataManager else { return }
+
+        ManagedWeather.delete(weather: managedObjects[index] as! ManagedWeather, managedContext: coreDataManager.persistentContainer.viewContext)
+        coreDataManager.saveContext()
+        completion()
+    }
+    
+    func updateItem(weatherData: [String:Any], forecastData: [[String:Any]], at index: Int, completion: (ManagedWeather) -> ()) {
+        guard let coreDataManager = coreDataManager else { return }
+        
+        let updatedWeather = ManagedWeather.update(weather: managedObjects[index] as! ManagedWeather, weatherData: weatherData, forecastData: forecastData, managedContext: coreDataManager.persistentContainer.viewContext)
+        managedObjects[index] = updatedWeather
+        coreDataManager.saveContext()
+        completion(updatedWeather)
+    }
 }

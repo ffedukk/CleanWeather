@@ -10,12 +10,14 @@ import UIKit
 
 protocol ListWeathersDisplayLogic: class
 {
-  func displayFetchedWeathers()//viewModel: ListOrders.FetchOrders.ViewModel)
+    func displayFetchedWeathers(viewModel: ListWeathers.FetchWeathers.ViewModel)//viewModel: ListOrders.FetchOrders.ViewModel)
 }
 
 class ListWeathersViewController: UICollectionViewController, ListWeathersDisplayLogic {
     
     var interactor: ListWeathersBusinessLogic?
+    
+    var displayedWeathers: [ListWeathers.FetchWeathers.ViewModel.DisplayedWeather] = []
     
     override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)
@@ -41,10 +43,16 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        interactor?.fetchWeathersFromCoreData()
+        //interactor?.addWeather(place: "london")
+        //interactor?.deleteWeather(at: 1)
+        interactor?.updateWeathers()
+        
     }
     
-    func displayFetchedWeathers() {
-        
+    func displayFetchedWeathers(viewModel: ListWeathers.FetchWeathers.ViewModel) {
+        displayedWeathers = viewModel.displayedWeathers
+        print(displayedWeathers.count)
     }
 
 }

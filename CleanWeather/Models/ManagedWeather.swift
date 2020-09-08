@@ -13,7 +13,6 @@ import CoreData
 public class ManagedWeather: NSManagedObject {
     
     public class func create(weatherData: [String : Any], forecastData: [[String : Any]], managedContext: NSManagedObjectContext) -> ManagedWeather {
-    
         let weather = ManagedWeather(context: managedContext)
         weather.placeName = weatherData["name"] as? String
         weather.feelsLike = weatherData["feelsLike"] as! Double

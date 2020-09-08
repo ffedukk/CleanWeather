@@ -14,7 +14,7 @@ public class ManagedForecast: NSManagedObject {
     
     public class func create(dict: [String: Any], weather: ManagedWeather, managedContext: NSManagedObjectContext) {
         let forecast = ManagedForecast(context: managedContext)
-        forecast.date = dict["date"] as? String
+        forecast.time = dict["date"] as? String
         forecast.temperature = dict["temp"] as! Double
         forecast.icon =  dict["weather"] as? String
         
@@ -33,7 +33,7 @@ extension ManagedForecast {
         return NSFetchRequest<ManagedForecast>(entityName: "ManagedForecast")
     }
 
-    @NSManaged public var date: String?
+    @NSManaged public var time: String?
     @NSManaged public var temperature: Double
     @NSManaged public var icon: String?
     @NSManaged public var managedWeather: ManagedWeather?

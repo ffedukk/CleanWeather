@@ -10,4 +10,44 @@ import UIKit
 
 class NetworkWorker {
     
+    weak var networkManager = (UIApplication.shared.delegate as! AppDelegate).networkManager
+    
+    func getWeatherData(weatherURL: String, forecastURL: String, completion: @escaping ([String:Any],[[String:Any]]) -> ()) {
+
+        guard let url1 = URL(string: weatherURL),
+            let url2 = URL(string: forecastURL),
+            let networkManager = networkManager
+        else { return }
+        
+        var weatherData: [String:Any] = [:]
+        var forecastData: [[String:Any]] = []
+        
+        let group = DispatchGroup()
+        group.enter()
+        networkManager.fetchResult(url: url1, parser: JSONWeatherParser()) { (result) in
+            switch result {
+            case .success(let parseData):
+                weatherData = parseData as! [String:Any]
+            case .failure(let error):
+                print(error)
+            }
+            group.leave()
+        }
+        group.enter()
+        networkManager.fetchResult(url: url2, parser: JSONForecastParser()) { (result) in
+            switch result {
+            case .success(let parseData):
+                forecastData = parseData as! [[String:Any]]
+            case .failure(let error):
+                print(error)
+            }
+            group.leave()
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            if !weatherData.isEmpty && !forecastData.isEmpty {
+                completion(weatherData,forecastData)
+            }
+        }
+    }
 }

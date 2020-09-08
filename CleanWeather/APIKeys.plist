@@ -2,9 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SearchAPIKey</key>
-	<string>5a952ad407d71e0b6b47ed1b151907ad</string>
 	<key>WeatherAPIKey</key>
+	<string>5a952ad407d71e0b6b47ed1b151907ad</string>
+	<key>SearchAPIKey</key>
 	<string>AIzaSyB-WCi6uqb7GOqONUocRT4cufVtrCm7Mm8</string>
 </dict>
 </plist>
