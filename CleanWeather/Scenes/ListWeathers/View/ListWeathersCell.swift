@@ -38,6 +38,8 @@ class ListWeathersCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        backgroundColor = .blue
+        
         placeNameLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 33)
         placeNameLabel.textColor = .white
         placeNameLabel.layer.shadowOffset = CGSize(width: 1, height: 1)

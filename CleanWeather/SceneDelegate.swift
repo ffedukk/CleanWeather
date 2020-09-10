@@ -16,9 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        window?.rootViewController = ListWeathersViewController(collectionViewLayout: layout)
+        let controller = ListWeathersViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        window?.rootViewController = UINavigationController(rootViewController: controller)
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.

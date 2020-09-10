@@ -40,12 +40,13 @@ enum ListWeathers
         {
             struct DisplayedWeather: DisplayedWeatherProtocol
             {
+                static let identifire = "listWeathersCell"
                 var placeName: String
                 var icon: String
                 var temperature: String
             }
             struct Buttons: DisplayedWeatherButtonsProtocol {
-                
+                static let identifire = "listWeathersButtonsCell"
             }
             var displayedItems: [ViewModelProtocol]
         }
