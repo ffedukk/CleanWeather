@@ -77,7 +77,7 @@ class CoreDataWorker {
     
     func updateItem(weatherData: [String:Any], forecastData: [[String:Any]], at index: Int, completion: (ManagedWeather) -> ()) {
         guard let coreDataManager = coreDataManager else { return }
-        print(coreDataManager.persistentContainer.persistentStoreDescriptions.first?.url)
+        //print(coreDataManager.persistentContainer.persistentStoreDescriptions.first?.url)
         let updatedWeather = ManagedWeather.update(weather: managedObjects[index] as! ManagedWeather, weatherData: weatherData, forecastData: forecastData, managedContext: coreDataManager.persistentContainer.viewContext)
         managedObjects[index] = updatedWeather
         coreDataManager.saveContext()

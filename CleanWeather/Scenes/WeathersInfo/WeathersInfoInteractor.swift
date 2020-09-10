@@ -1,8 +1,8 @@
 //
-//  ListWeathersInteractor.swift
+//  WeathersInfoInteractor.swift
 //  CleanWeather
 //
-//  Created by 18592232 on 06.09.2020.
+//  Created by 18592232 on 10.09.2020.
 //  Copyright © 2020 18592232. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 
 //    MARK: Protocols
 
-protocol ListWeathersBusinessLogic
+protocol WeathersInfoBusinessLogic
 {
     func fetchWeathersFromCoreData()
     func updateWeathers()
@@ -18,20 +18,20 @@ protocol ListWeathersBusinessLogic
     func deleteWeather(at index: Int)
 }
 
-protocol ListWeathersDataStore
+protocol WeathersInfoDataStore
 {
     var weathers: [Weather]? { get }
 }
 
-protocol ListWeathersLocation: class {
-    func addWeatherInLocation(latitude: String, longitude: String)
-}
+//protocol WeathersInfoLocation: class {
+//    func addWeatherInLocation(latitude: String, longitude: String)
+//}
 
 //    MARK: Interactor
 
-class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, ListWeathersLocation {
+class WeathersInfoInteractor: WeathersInfoBusinessLogic, WeathersInfoDataStore, ListWeathersLocation {
     
-    var presenter: ListWeathersPresentationLogic?
+    var presenter: WeathersInfoPresentationLogic?
     var networkWorker = NetworkWorker()
     var coreDataWorker = CoreDataWorker()
     var locationWorker = LocationWorker()

@@ -25,41 +25,9 @@ enum ListWeathers
         {
             struct DisplayedWeather
             {
-                var town: Town
-                struct Town {
-                    var icon: String
-                    var header: Header
-                    var listOfForecast: DisplayedForecasts
-                    var additionalInfo: AdditionalInfo
-                    
-                    struct Header {
-                        var placeName: String
-                        var weatherDescription: String
-                        var temperature: String
-                        var temperatureMax: String
-                        var temperatureMin: String
-                    }
-                    struct DisplayedForecasts {
-                        struct ForecastForTime {
-                            var time: String
-                            var temperature: String
-                            var icon: String
-                        }
-                        var displayedForecast: [ForecastForTime]
-                    }
-                    struct AdditionalInfo {
-                        var sunriseDescription: String
-                        var sunrise: String
-                        var sunsetDescription: String
-                        var sunset: String
-                        var windSpeedDescription: String
-                        var windSpeed: String
-                        var feelsLikeDescription: String
-                        var feelsLike: String
-                        var pressureDescription: String
-                        var pressure: String
-                    }
-                }
+                var placeName: String
+                var icon: String
+                var temperature: String
             }
             var displayedWeathers: [DisplayedWeather]
         }

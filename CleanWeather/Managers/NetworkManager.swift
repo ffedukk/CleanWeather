@@ -27,7 +27,7 @@ class NetworkManager {
     
     let session = URLSession(configuration: .default)
     
-    func fetchResult<parser: ParserProtocol>(url: URL, parser: parser, completion: @escaping (Result<Any, Error>)->() ) {
+    func fetchResult<parser: ParserProtocol>(url: URL, parser: parser, completion: @escaping (Result<parser.Result, Error>)->() ) {
         
         session.dataTask(with: url) { (data, response, error) in
             completion(Result {

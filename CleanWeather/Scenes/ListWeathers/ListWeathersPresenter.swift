@@ -28,30 +28,8 @@ class ListWeathersPresenter: ListWeathersPresentationLogic {
             
             let icon = "Main" + weather.icon
             let temperature = fromKelvinToCelcius(kelvin: weather.temperature)
-            let temperatureMax = fromKelvinToCelcius(kelvin: weather.temperatureMax)
-            let temperatureMin = fromKelvinToCelcius(kelvin: weather.temperatureMin)
             
-            let header = ListWeathers.FetchWeathers.ViewModel.DisplayedWeather.Town.Header(placeName: weather.placeName, weatherDescription: weather.weatherDescription, temperature: temperature, temperatureMax: temperatureMax, temperatureMin: temperatureMin)
-            
-            var forecastDateArray: [ListWeathers.FetchWeathers.ViewModel.DisplayedWeather.Town.DisplayedForecasts.ForecastForTime] = []
-            for forecast in weather.forecastList {
-                let time = fromDateToTime(date: forecast.time)
-                let forcastTemperature = fromKelvinToCelcius(kelvin: forecast.temperature)
-                forecastDateArray.append(ListWeathers.FetchWeathers.ViewModel.DisplayedWeather.Town.DisplayedForecasts.ForecastForTime(time: time, temperature: forcastTemperature, icon: forecast.icon))
-            }
-            
-            let displayedForecast = ListWeathers.FetchWeathers.ViewModel.DisplayedWeather.Town.DisplayedForecasts(displayedForecast: forecastDateArray)
-            
-            let sunrise = fromIntToDate(integer: weather.sunrise)
-            let sunset = fromIntToDate(integer: weather.sunset)
-            let feelsLike = fromKelvinToCelcius(kelvin: weather.feelsLike)
-            let pressure = fromHPAtoMM(hpa: weather.pressure)
-            
-            let additionalInfo = ListWeathers.FetchWeathers.ViewModel.DisplayedWeather.Town.AdditionalInfo(sunriseDescription: "Sunrise", sunrise: sunrise, sunsetDescription: "Sunset", sunset: sunset, windSpeedDescription: "Wind Speed", windSpeed: String(weather.windSpeed), feelsLikeDescription: "Feels Like", feelsLike: feelsLike, pressureDescription: "Pressure", pressure: pressure)
-            
-            let town = ListWeathers.FetchWeathers.ViewModel.DisplayedWeather.Town(icon: icon, header: header, listOfForecast: displayedForecast, additionalInfo: additionalInfo)
-            
-            let displayedWeather = ListWeathers.FetchWeathers.ViewModel.DisplayedWeather(town: town)
+            let displayedWeather = ListWeathers.FetchWeathers.ViewModel.DisplayedWeather(placeName: weather.placeName, icon: icon, temperature: temperature)
             
             displayedWeathers.append(displayedWeather)
         }

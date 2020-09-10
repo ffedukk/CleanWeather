@@ -27,7 +27,7 @@ class NetworkWorker {
         networkManager.fetchResult(url: url1, parser: JSONWeatherParser()) { (result) in
             switch result {
             case .success(let parseData):
-                weatherData = parseData as! [String:Any]
+                weatherData = parseData
             case .failure(let error):
                 print(error)
             }
@@ -37,7 +37,7 @@ class NetworkWorker {
         networkManager.fetchResult(url: url2, parser: JSONForecastParser()) { (result) in
             switch result {
             case .success(let parseData):
-                forecastData = parseData as! [[String:Any]]
+                forecastData = parseData
             case .failure(let error):
                 print(error)
             }
