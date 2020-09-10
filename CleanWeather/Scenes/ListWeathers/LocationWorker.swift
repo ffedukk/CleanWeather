@@ -12,7 +12,7 @@ import CoreLocation
 
 class LocationWorker: NSObject, CLLocationManagerDelegate {
     
-    weak var interactor: ListWeathersLocation?
+    weak var interactor: ListWeatherLocation?
     private let locationManager = CLLocationManager()
     var latitude: String?
     var longitude: String?

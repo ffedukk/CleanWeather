@@ -29,7 +29,7 @@ protocol WeathersInfoDataStore
 
 //    MARK: Interactor
 
-class WeathersInfoInteractor: WeathersInfoBusinessLogic, WeathersInfoDataStore, ListWeathersLocation {
+class WeathersInfoInteractor: WeathersInfoBusinessLogic, WeathersInfoDataStore, ListWeatherLocation {
     
     var presenter: WeathersInfoPresentationLogic?
     var networkWorker = NetworkWorker()

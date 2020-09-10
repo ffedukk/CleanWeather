@@ -22,7 +22,7 @@ class ListWeathersPresenter: ListWeathersPresentationLogic {
     weak var viewController: ListWeathersDisplayLogic?
     
     func presentFetchedWeathers(weathers: [Weather]) {
-        var displayedWeathers: [ListWeathers.FetchWeathers.ViewModel.DisplayedWeather] = []
+        var displayedWeathers: [ViewModelProtocol] = []
         
         for weather in weathers {
             
@@ -33,8 +33,9 @@ class ListWeathersPresenter: ListWeathersPresentationLogic {
             
             displayedWeathers.append(displayedWeather)
         }
+        displayedWeathers.append(ListWeathers.FetchWeathers.ViewModel.Buttons())
         
-        let viewModel = ListWeathers.FetchWeathers.ViewModel(displayedWeathers: displayedWeathers)
+        let viewModel = ListWeathers.FetchWeathers.ViewModel(displayedItems: displayedWeathers)
         viewController?.displayFetchedWeathers(viewModel: viewModel)
         
     }

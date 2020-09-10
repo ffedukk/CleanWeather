@@ -44,7 +44,10 @@ enum ListWeathers
                 var icon: String
                 var temperature: String
             }
-            var displayedWeathers: [DisplayedWeather]
+            struct Buttons: DisplayedWeatherButtonsProtocol {
+                
+            }
+            var displayedItems: [ViewModelProtocol]
         }
     }
 }

@@ -12,7 +12,7 @@ import UIKit
 
 protocol ListWeathersDisplayLogic: class
 {
-    func displayFetchedWeathers(viewModel: ListWeathers.FetchWeathers.ViewModel)//viewModel: ListOrders.FetchOrders.ViewModel)
+    func displayFetchedWeathers(viewModel: ListWeathers.FetchWeathers.ViewModel)
 }
 
 //    MARK: Controller
@@ -68,17 +68,18 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
         interactor?.fetchWeathersFromCoreData()
         //interactor?.addWeather(place: "london")
         //interactor?.deleteWeather(at: 1)
-        interactor?.updateWeathers()
+        //interactor?.updateWeathers()
+        
         
     }
     
     //    MARK: Display
     
-    var displayedWeathers: [ViewModelProtocol] = []
+    var displayedItems: [ViewModelProtocol] = []
     
     func displayFetchedWeathers(viewModel: ListWeathers.FetchWeathers.ViewModel) {
-        displayedWeathers = viewModel.displayedWeathers
-        print(displayedWeathers.count)
+        displayedItems = viewModel.displayedItems
+        print(displayedItems.count)
         //print(displayedWeathers)
         collectionView.reloadData()
     }
@@ -90,25 +91,25 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     }
     
     @objc func editButtonPressed() {
-        if displayedWeathers.count != 1 {
+        if displayedItems.count != 1 {
             isEditing ? setEditing(false, animated: true) : setEditing(true, animated: true)
         }
     }
     
     @objc func deleteButtonPressed() {
-        interactor?.updateWeathers()
-//        if let selectedCells = collectionView.indexPathsForSelectedItems {
-//            let items = selectedCells.map { $0.item }.sorted(by: >)//.reversed()
-//            print(items)
-//            for item in items {
-//                interactor?.deleteWeather(at: item)
-//            }
-//            if displayedWeathers.count == 1 {
-//                setEditing(false, animated: false)
-//            }
-//            //collectionView.deleteItems(at: selectedCells)
-//            //deleteButton.isEnabled = false
-//        }
+        //interactor?.updateWeathers()
+        if let selectedCells = collectionView.indexPathsForSelectedItems {
+            let items = selectedCells.map { $0.item }.sorted(by: >)//.reversed()
+            print(items)
+            for item in items {
+                interactor?.deleteWeather(at: item)
+            }
+            if displayedItems.count == 1 {
+                setEditing(false, animated: false)
+            }
+            //collectionView.deleteItems(at: selectedCells)
+            //deleteButton.isEnabled = false
+        }
     }
 }
 
@@ -116,19 +117,18 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
 
 extension ListWeathersViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return displayedWeathers.count + 1
+        return displayedItems.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let modelItem = displayedWeathers[indexPath.item]
+        let modelItem = displayedItems[indexPath.item]
+        
         switch modelItem {
-            
         case is DisplayedWeatherProtocol:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "listWeathersCell", for: indexPath) as! ListWeathersCell
             cell.setCell(weather: modelItem as! DisplayedWeatherProtocol)
             if indexPath.item != 0 {cell.isInEditingMode = isEditing}
             return cell
-            
         case is DisplayedWeatherButtonsProtocol:
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "listWeathersButtonsCell", for: indexPath) as! ListWeathersButtonsCell
         return cell
@@ -146,7 +146,7 @@ extension ListWeathersViewController {
         collectionView.allowsMultipleSelection = editing
         let indexPaths = collectionView.indexPathsForVisibleItems
         for indexPath in indexPaths {
-            if indexPath.item != 0 && indexPath.item != displayedWeathers.count {
+            if (indexPath.item != 0) && (indexPath.item != displayedItems.count - 1) {
                 let cell = collectionView.cellForItem(at: indexPath) as! ListWeathersCell
                 cell.isInEditingMode = editing
             }
@@ -155,6 +155,17 @@ extension ListWeathersViewController {
             for item in selectedItems {
                 collectionView.deselectItem(at: item, animated: false)
             }
+        }
+    }
+}
+
+extension ListWeathersViewController {
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if indexPath.item != 0 && indexPath.item != displayedItems.count - 1 {
+            return true
+        }
+        else {
+            return false
         }
     }
 }

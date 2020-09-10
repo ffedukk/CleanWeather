@@ -23,13 +23,13 @@ protocol ListWeathersDataStore
     var weathers: [Weather]? { get }
 }
 
-protocol ListWeathersLocation: class {
+protocol ListWeatherLocation: class {
     func addWeatherInLocation(latitude: String, longitude: String)
 }
 
 //    MARK: Interactor
 
-class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, ListWeathersLocation {
+class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, ListWeatherLocation {
     
     var presenter: ListWeathersPresentationLogic?
     var networkWorker = NetworkWorker()
