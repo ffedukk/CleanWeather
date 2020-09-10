@@ -8,6 +8,21 @@
 
 import UIKit
 
+
+protocol ViewModelProtocol {
+    
+}
+
+protocol DisplayedWeatherProtocol: ViewModelProtocol {
+    var placeName: String { get }
+    var icon: String { get }
+    var temperature: String { get }
+}
+
+protocol DisplayedWeatherButtonsProtocol: ViewModelProtocol {
+    
+}
+
 enum ListWeathers
 {
     // MARK: Use cases
@@ -23,7 +38,7 @@ enum ListWeathers
         }
         struct ViewModel
         {
-            struct DisplayedWeather
+            struct DisplayedWeather: DisplayedWeatherProtocol
             {
                 var placeName: String
                 var icon: String

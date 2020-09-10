@@ -21,33 +21,47 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     
     var interactor: ListWeathersBusinessLogic?
     
-//    MARK: Init
-
+    //    MARK: Init
+    
     override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)
         setup()
+        initConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    MARK: Setup
+    //    MARK: Setup
     
     private func setup() {
-      let viewController = self
-      let interactor = ListWeathersInteractor()
-      let presenter = ListWeathersPresenter()
-      //let router = ListOrdersRouter()
-      viewController.interactor = interactor
-      //viewController.router = router
-      interactor.presenter = presenter
-      presenter.viewController = viewController
-      //router.viewController = viewController
-      //router.dataStore = interactor
+        let viewController = self
+        let interactor = ListWeathersInteractor()
+        let presenter = ListWeathersPresenter()
+        //let router = ListOrdersRouter()
+        viewController.interactor = interactor
+        //viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        //router.viewController = viewController
+        //router.dataStore = interactor
+        
+        collectionView.setCollectionViewLayout(ListWeathersCollectionViewLayout(), animated: false)
+        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.register(ListWeathersCell.self, forCellWithReuseIdentifier: "listWeathersCell")
+        collectionView.register(ListWeathersButtonsCell.self, forCellWithReuseIdentifier: "listWeathersButtonsCell")
     }
     
-//    MARK: Life cycle
+    private func initConstraints() {
+        NSLayoutConstraint.activate([
+
+        ])
+    }
+    
+    //    MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,15 +72,89 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
         
     }
     
-//    MARK: Display
+    //    MARK: Display
     
-    var displayedWeathers: [ListWeathers.FetchWeathers.ViewModel.DisplayedWeather] = []
+    var displayedWeathers: [ViewModelProtocol] = []
     
     func displayFetchedWeathers(viewModel: ListWeathers.FetchWeathers.ViewModel) {
         displayedWeathers = viewModel.displayedWeathers
         print(displayedWeathers.count)
-        print(displayedWeathers)
+        //print(displayedWeathers)
+        collectionView.reloadData()
     }
-
+    
+    //   MARK: Buttons
+    
+    @objc func addButtonPressed() {
+        interactor?.addWeather(place: "moscow")
+    }
+    
+    @objc func editButtonPressed() {
+        if displayedWeathers.count != 1 {
+            isEditing ? setEditing(false, animated: true) : setEditing(true, animated: true)
+        }
+    }
+    
+    @objc func deleteButtonPressed() {
+        interactor?.updateWeathers()
+//        if let selectedCells = collectionView.indexPathsForSelectedItems {
+//            let items = selectedCells.map { $0.item }.sorted(by: >)//.reversed()
+//            print(items)
+//            for item in items {
+//                interactor?.deleteWeather(at: item)
+//            }
+//            if displayedWeathers.count == 1 {
+//                setEditing(false, animated: false)
+//            }
+//            //collectionView.deleteItems(at: selectedCells)
+//            //deleteButton.isEnabled = false
+//        }
+    }
 }
 
+//MARK: CollectionViewDataSource
+
+extension ListWeathersViewController {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return displayedWeathers.count + 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let modelItem = displayedWeathers[indexPath.item]
+        switch modelItem {
+            
+        case is DisplayedWeatherProtocol:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "listWeathersCell", for: indexPath) as! ListWeathersCell
+            cell.setCell(weather: modelItem as! DisplayedWeatherProtocol)
+            if indexPath.item != 0 {cell.isInEditingMode = isEditing}
+            return cell
+            
+        case is DisplayedWeatherButtonsProtocol:
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "listWeathersButtonsCell", for: indexPath) as! ListWeathersButtonsCell
+        return cell
+            
+        default:
+            fatalError()
+        }
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if !editing {
+            //deleteButton.isEnabled = false
+        }
+        collectionView.allowsMultipleSelection = editing
+        let indexPaths = collectionView.indexPathsForVisibleItems
+        for indexPath in indexPaths {
+            if indexPath.item != 0 && indexPath.item != displayedWeathers.count {
+                let cell = collectionView.cellForItem(at: indexPath) as! ListWeathersCell
+                cell.isInEditingMode = editing
+            }
+        }
+        if let selectedItems = collectionView.indexPathsForSelectedItems {
+            for item in selectedItems {
+                collectionView.deselectItem(at: item, animated: false)
+            }
+        }
+    }
+}
