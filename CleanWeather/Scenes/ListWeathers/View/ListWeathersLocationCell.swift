@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListWeathersLocationCell: UICollectionViewCell {
+class ListWeathersLocationCell: ListWeathersBaseCell {
     
 //    MARK: Properties
     
@@ -67,7 +67,8 @@ class ListWeathersLocationCell: UICollectionViewCell {
     
 //    MARK: Logic
 
-    func setCell(weather: DisplayedWeatherLocationProtocol) {
+    override func setCell(weather: ViewModelProtocol) {
+        let weather = weather as! DisplayedWeatherLocationProtocol
         placeNameLabel.text = weather.placeName
         temperatureLabel.text = weather.temperature
         

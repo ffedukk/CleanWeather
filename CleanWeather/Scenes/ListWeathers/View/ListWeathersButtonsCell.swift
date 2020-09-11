@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListWeathersButtonsCell: UICollectionViewCell {
+class ListWeathersButtonsCell: ListWeathersBaseCell {
     
     private let addButton = UIButton(type: .contactAdd)
     private let editButton = UIButton()
@@ -55,5 +55,7 @@ class ListWeathersButtonsCell: UICollectionViewCell {
             deleteButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
         ])
     }
+    
+    
 
 }

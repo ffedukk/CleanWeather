@@ -49,9 +49,9 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
         collectionView.setCollectionViewLayout(ListWeathersCollectionViewLayout(), animated: false)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.register(ListWeathersCell.self, forCellWithReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.DisplayedWeather.identifire)
-        collectionView.register(ListWeathersButtonsCell.self, forCellWithReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.Buttons.identifire)
-        collectionView.register(ListWeathersLocationCell.self, forCellWithReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.DisplayedWeatherLocation.identifire)
+        collectionView.register(ListWeathersCell.self, forCellWithReuseIdentifier: "listWeathersCell")
+        collectionView.register(ListWeathersButtonsCell.self, forCellWithReuseIdentifier: "listWeathersButtonsCell")
+        collectionView.register(ListWeathersLocationCell.self, forCellWithReuseIdentifier: "listWeathersLocationCell")
     }
     
     //    MARK: Life cycle
@@ -110,24 +110,9 @@ extension ListWeathersViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let modelItem = displayedItems[indexPath.item]
-        
-        switch modelItem {
-        case is DisplayedWeatherLocationProtocol:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.DisplayedWeatherLocation.identifire, for: indexPath) as! ListWeathersLocationCell
-            cell.setCell(weather: modelItem as! DisplayedWeatherLocationProtocol)
-            return cell
-        case is DisplayedWeatherProtocol:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.DisplayedWeather.identifire, for: indexPath) as! ListWeathersCell
-            cell.setCell(weather: modelItem as! DisplayedWeatherProtocol)
-            if indexPath.item != 0 {cell.isInEditingMode = isEditing}
-            return cell
-        case is DisplayedWeatherButtonsProtocol:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.Buttons.identifire, for: indexPath) as! ListWeathersButtonsCell
-            return cell
-            
-        default:
-            fatalError()
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: modelItem.identifire, for: indexPath) as! ListWeathersBaseCell
+        cell.setCell(weather: modelItem)
+        return cell
     }
 }
 
