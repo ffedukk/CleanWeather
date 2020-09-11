@@ -12,7 +12,7 @@ import UIKit
 
 protocol WeathersInfoPresentationLogic
 {
-    func presentFetchedWeathers(weathers: [Weather])//response: ListOrders.FetchOrders.Response)
+    func presentFetchedWeathers(response: WeathersInfo.FetchWeathers.Response)
 }
 
 //    MARK: Presenter
@@ -21,10 +21,10 @@ class WeathersInfoPresenter: WeathersInfoPresentationLogic {
     
     weak var viewController: WeathersInfoDisplayLogic?
     
-    func presentFetchedWeathers(weathers: [Weather]) {
+    func presentFetchedWeathers(response: WeathersInfo.FetchWeathers.Response) {
         var displayedWeathers: [WeathersInfo.FetchWeathers.ViewModel.DisplayedWeather] = []
         
-        for weather in weathers {
+        for weather in response.weathers {
             
             let icon = "Main" + weather.icon
             let temperature = fromKelvinToCelcius(kelvin: weather.temperature)

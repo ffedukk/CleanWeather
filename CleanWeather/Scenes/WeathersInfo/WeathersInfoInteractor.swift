@@ -12,7 +12,7 @@ import UIKit
 
 protocol WeathersInfoBusinessLogic
 {
-    func fetchWeathersFromCoreData()
+    func fetchWeathersFromCoreData(request: WeathersInfo.FetchWeathers.Request)
     func updateWeathers()
     func addWeather(place: String)
     func deleteWeather(at index: Int)
@@ -20,7 +20,7 @@ protocol WeathersInfoBusinessLogic
 
 protocol WeathersInfoDataStore
 {
-    var weathers: [Weather]? { get }
+    var weathers: [Weather]? { get set }
 }
 
 //protocol WeathersInfoLocation: class {
@@ -45,7 +45,8 @@ class WeathersInfoInteractor: WeathersInfoBusinessLogic, WeathersInfoDataStore, 
     func deleteWeather(at index: Int) {
         coreDataWorker.deleteFromData(at: index) {
             weathers?.remove(at: index)
-            presenter?.presentFetchedWeathers(weathers: weathers!)
+            let response = WeathersInfo.FetchWeathers.Response(weathers: self.weathers!)
+            self.presenter?.presentFetchedWeathers(response: response)
         }
     }
     
@@ -69,12 +70,13 @@ class WeathersInfoInteractor: WeathersInfoBusinessLogic, WeathersInfoDataStore, 
                 }
             }
         }
-        presenter?.presentFetchedWeathers(weathers: weathers!)
+        let response = WeathersInfo.FetchWeathers.Response(weathers: self.weathers!)
+        self.presenter?.presentFetchedWeathers(response: response)
     }
     
 //    MARK: Fetching
     
-    func fetchWeathersFromCoreData() {
+    func fetchWeathersFromCoreData(request: WeathersInfo.FetchWeathers.Request) {
         coreDataWorker.fetch { [weak self] (managedWeathers) in
             guard let self = self else { return }
             var fetchedWeathers: [Weather] = []
@@ -84,7 +86,8 @@ class WeathersInfoInteractor: WeathersInfoBusinessLogic, WeathersInfoDataStore, 
                 }
             }
             self.weathers = fetchedWeathers
-            self.presenter?.presentFetchedWeathers(weathers: self.weathers!)
+            let response = WeathersInfo.FetchWeathers.Response(weathers: self.weathers!)
+            self.presenter?.presentFetchedWeathers(response: response)
         }
     }
 
@@ -106,7 +109,8 @@ class WeathersInfoInteractor: WeathersInfoBusinessLogic, WeathersInfoDataStore, 
                     } else {
                         self.weathers = [newWeather]
                     }
-                    self.presenter?.presentFetchedWeathers(weathers: self.weathers!)
+                    let response = WeathersInfo.FetchWeathers.Response(weathers: self.weathers!)
+                    self.presenter?.presentFetchedWeathers(response: response)
                 }
             }
         }
@@ -129,7 +133,8 @@ class WeathersInfoInteractor: WeathersInfoBusinessLogic, WeathersInfoDataStore, 
                         if let newWeather = Weather(with: managedWeather) {
                             guard let self = self else { return }
                             self.weathers!.append(newWeather)
-                            self.presenter?.presentFetchedWeathers(weathers: self.weathers!)
+                            let response = WeathersInfo.FetchWeathers.Response(weathers: self.weathers!)
+                            self.presenter?.presentFetchedWeathers(response: response)
                         }
                     }
                 } else {
@@ -137,7 +142,8 @@ class WeathersInfoInteractor: WeathersInfoBusinessLogic, WeathersInfoDataStore, 
                         guard let self = self else { return }
                         if let updatedWeather = Weather(with: managedWeather) {
                             self.weathers![0] = updatedWeather
-                            self.presenter?.presentFetchedWeathers(weathers: self.weathers!)
+                            let response = WeathersInfo.FetchWeathers.Response(weathers: self.weathers!)
+                            self.presenter?.presentFetchedWeathers(response: response)
                         }
                     }
                 }

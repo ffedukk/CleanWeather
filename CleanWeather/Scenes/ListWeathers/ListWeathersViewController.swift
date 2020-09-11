@@ -20,7 +20,7 @@ protocol ListWeathersDisplayLogic: class
 class ListWeathersViewController: UICollectionViewController, ListWeathersDisplayLogic {
     
     var interactor: ListWeathersBusinessLogic?
-    var router: (NSObjectProtocol & ListWeathersRoutingLogic & ListWeathersDataPassing)?
+    var router: (ListWeathersRoutingLogic & ListWeathersDataPassing)?
     
     //    MARK: Init
     
@@ -80,7 +80,8 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     //   MARK: Buttons
     
     @objc func addButtonPressed() {
-        interactor?.addWeather(place: "moscow")
+        //interactor?.addWeather(place: "moscow")
+        router?.routeToMainWeather()
     }
     
     @objc func editButtonPressed() {
