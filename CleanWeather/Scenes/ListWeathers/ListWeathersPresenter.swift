@@ -12,7 +12,7 @@ import UIKit
 
 protocol ListWeathersPresentationLogic
 {
-    func presentFetchedWeathers(response: ListWeathers.FetchWeathers.Response)//weathers: [Weather])//response: ListOrders.FetchOrders.Response)
+    func presentFetchedWeathers(response: ListWeathers.FetchWeathers.Response)
 }
 
 //    MARK: Presenter
@@ -21,7 +21,7 @@ class ListWeathersPresenter: ListWeathersPresentationLogic {
     
     weak var viewController: ListWeathersDisplayLogic?
     
-    func presentFetchedWeathers(response: ListWeathers.FetchWeathers.Response) {//weathers: [Weather]) {
+    func presentFetchedWeathers(response: ListWeathers.FetchWeathers.Response) {
         var displayedWeathers: [ViewModelProtocol] = []
         
         for (index, weather) in response.weathers.enumerated() {
@@ -40,7 +40,6 @@ class ListWeathersPresenter: ListWeathersPresentationLogic {
         
         let viewModel = ListWeathers.FetchWeathers.ViewModel(displayedItems: displayedWeathers)
         viewController?.displayFetchedWeathers(viewModel: viewModel)
-        
     }
     
     
@@ -50,25 +49,4 @@ class ListWeathersPresenter: ListWeathersPresentationLogic {
         let celcius = Int(kelvin - 273.15)
         return "\(celcius)°C"
     }
-    
-    private func fromDateToTime(date: String) -> String {
-        let startIndex = date.firstIndex(of: " ")!
-        let endIndex = date.index(date.endIndex, offsetBy: -4)
-        let time = date[startIndex...endIndex]
-        return String(time)
-    }
-    
-    private func fromHPAtoMM(hpa: Double) -> String {
-        let mm = Double(round(100*(hpa/1.333))/100)
-        return "\(mm) mm"
-    }
-    
-    private func fromIntToDate(integer: Int64) -> String {
-        let myNSDate = Date(timeIntervalSince1970: TimeInterval(integer))
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        let time = dateFormatter.string(from: myNSDate)
-        return time
-    }
-    
 }
