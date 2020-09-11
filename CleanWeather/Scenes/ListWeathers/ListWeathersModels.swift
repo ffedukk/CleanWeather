@@ -13,6 +13,12 @@ protocol ViewModelProtocol {
     
 }
 
+protocol DisplayedWeatherLocationProtocol: ViewModelProtocol {
+    var placeName: String { get }
+    var icon: String { get }
+    var temperature: String { get }
+}
+
 protocol DisplayedWeatherProtocol: ViewModelProtocol {
     var placeName: String { get }
     var icon: String { get }
@@ -22,6 +28,8 @@ protocol DisplayedWeatherProtocol: ViewModelProtocol {
 protocol DisplayedWeatherButtonsProtocol: ViewModelProtocol {
     
 }
+
+
 
 enum ListWeathers
 {
@@ -38,6 +46,12 @@ enum ListWeathers
         }
         struct ViewModel
         {
+            struct DisplayedWeatherLocation: DisplayedWeatherLocationProtocol {
+                static let identifire = "listWeathersLocationCell"
+                var placeName: String
+                var icon: String
+                var temperature: String
+            }
             struct DisplayedWeather: DisplayedWeatherProtocol
             {
                 static let identifire = "listWeathersCell"

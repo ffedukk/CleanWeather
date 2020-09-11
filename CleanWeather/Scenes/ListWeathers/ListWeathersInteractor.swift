@@ -12,7 +12,7 @@ import UIKit
 
 protocol ListWeathersBusinessLogic
 {
-    func fetchWeathersFromCoreData()
+    func fetchWeathersFromCoreData(request: ListWeathers.FetchWeathers.Request)
     func updateWeathers()
     func addWeather(place: String)
     func deleteWeather(at index: Int)
@@ -45,7 +45,8 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
     func deleteWeather(at index: Int) {
         coreDataWorker.deleteFromData(at: index) {
             weathers?.remove(at: index)
-            presenter?.presentFetchedWeathers(weathers: weathers!)
+            let response = ListWeathers.FetchWeathers.Response(weathers: self.weathers!)
+            self.presenter?.presentFetchedWeathers(response: response)
         }
     }
     
@@ -53,6 +54,8 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
         
     func updateWeathers() {
         guard let _ = weathers else { return }
+        
+        locationWorker.startUpdateLocation()
         
         for index in 1..<weathers!.count {
             
@@ -69,12 +72,13 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
                 }
             }
         }
-        presenter?.presentFetchedWeathers(weathers: weathers!)
+        let response = ListWeathers.FetchWeathers.Response(weathers: self.weathers!)
+        self.presenter?.presentFetchedWeathers(response: response)
     }
     
 //    MARK: Fetching
     
-    func fetchWeathersFromCoreData() {
+    func fetchWeathersFromCoreData(request: ListWeathers.FetchWeathers.Request) {
         coreDataWorker.fetch { [weak self] (managedWeathers) in
             guard let self = self else { return }
             var fetchedWeathers: [Weather] = []
@@ -84,7 +88,8 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
                 }
             }
             self.weathers = fetchedWeathers
-            self.presenter?.presentFetchedWeathers(weathers: self.weathers!)
+            let response = ListWeathers.FetchWeathers.Response(weathers: self.weathers!)
+            self.presenter?.presentFetchedWeathers(response: response)
         }
     }
 
@@ -106,7 +111,8 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
                     } else {
                         self.weathers = [newWeather]
                     }
-                    self.presenter?.presentFetchedWeathers(weathers: self.weathers!)
+                    let response = ListWeathers.FetchWeathers.Response(weathers: self.weathers!)
+                    self.presenter?.presentFetchedWeathers(response: response)
                 }
             }
         }
@@ -129,7 +135,8 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
                         if let newWeather = Weather(with: managedWeather) {
                             guard let self = self else { return }
                             self.weathers!.append(newWeather)
-                            self.presenter?.presentFetchedWeathers(weathers: self.weathers!)
+                            let response = ListWeathers.FetchWeathers.Response(weathers: self.weathers!)
+                            self.presenter?.presentFetchedWeathers(response: response)
                         }
                     }
                 } else {
@@ -137,7 +144,8 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
                         guard let self = self else { return }
                         if let updatedWeather = Weather(with: managedWeather) {
                             self.weathers![0] = updatedWeather
-                            self.presenter?.presentFetchedWeathers(weathers: self.weathers!)
+                            let response = ListWeathers.FetchWeathers.Response(weathers: self.weathers!)
+                            self.presenter?.presentFetchedWeathers(response: response)
                         }
                     }
                 }

@@ -12,7 +12,7 @@ import UIKit
 
 protocol ListWeathersPresentationLogic
 {
-    func presentFetchedWeathers(weathers: [Weather])//response: ListOrders.FetchOrders.Response)
+    func presentFetchedWeathers(response: ListWeathers.FetchWeathers.Response)//weathers: [Weather])//response: ListOrders.FetchOrders.Response)
 }
 
 //    MARK: Presenter
@@ -21,16 +21,19 @@ class ListWeathersPresenter: ListWeathersPresentationLogic {
     
     weak var viewController: ListWeathersDisplayLogic?
     
-    func presentFetchedWeathers(weathers: [Weather]) {
+    func presentFetchedWeathers(response: ListWeathers.FetchWeathers.Response) {//weathers: [Weather]) {
         var displayedWeathers: [ViewModelProtocol] = []
         
-        for weather in weathers {
+        for (index, weather) in response.weathers.enumerated() {
+            let displayedWeather: ViewModelProtocol
             
             let icon = "Main" + weather.icon
             let temperature = fromKelvinToCelcius(kelvin: weather.temperature)
-            
-            let displayedWeather = ListWeathers.FetchWeathers.ViewModel.DisplayedWeather(placeName: weather.placeName, icon: icon, temperature: temperature)
-            
+            if index == 0 {
+                displayedWeather = ListWeathers.FetchWeathers.ViewModel.DisplayedWeatherLocation(placeName: weather.placeName, icon: icon, temperature: temperature)
+            } else {
+                displayedWeather = ListWeathers.FetchWeathers.ViewModel.DisplayedWeather(placeName: weather.placeName, icon: icon, temperature: temperature)
+            }
             displayedWeathers.append(displayedWeather)
         }
         displayedWeathers.append(ListWeathers.FetchWeathers.ViewModel.Buttons())

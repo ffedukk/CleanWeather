@@ -51,13 +51,14 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ListWeathersCell.self, forCellWithReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.DisplayedWeather.identifire)
         collectionView.register(ListWeathersButtonsCell.self, forCellWithReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.Buttons.identifire)
+        collectionView.register(ListWeathersLocationCell.self, forCellWithReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.DisplayedWeatherLocation.identifire)
     }
     
     //    MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        interactor?.fetchWeathersFromCoreData()
+        interactor?.fetchWeathersFromCoreData(request: ListWeathers.FetchWeathers.Request())
         
     }
     
@@ -111,26 +112,46 @@ extension ListWeathersViewController {
         let modelItem = displayedItems[indexPath.item]
         
         switch modelItem {
+        case is DisplayedWeatherLocationProtocol:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.DisplayedWeatherLocation.identifire, for: indexPath) as! ListWeathersLocationCell
+            cell.setCell(weather: modelItem as! DisplayedWeatherLocationProtocol)
+            return cell
         case is DisplayedWeatherProtocol:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.DisplayedWeather.identifire, for: indexPath) as! ListWeathersCell
             cell.setCell(weather: modelItem as! DisplayedWeatherProtocol)
             if indexPath.item != 0 {cell.isInEditingMode = isEditing}
             return cell
         case is DisplayedWeatherButtonsProtocol:
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.Buttons.identifire, for: indexPath) as! ListWeathersButtonsCell
-        return cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListWeathers.FetchWeathers.ViewModel.Buttons.identifire, for: indexPath) as! ListWeathersButtonsCell
+            return cell
             
         default:
             fatalError()
         }
     }
-    
+}
+
+//MARK: CollectionViewDelegate
+
+extension ListWeathersViewController {
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if displayedItems[indexPath.item] is DisplayedWeatherProtocol {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+//MARK: Set Editind
+
+extension ListWeathersViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         collectionView.allowsMultipleSelection = editing
         let indexPaths = collectionView.indexPathsForVisibleItems
         for indexPath in indexPaths {
-            if (indexPath.item != 0) && (indexPath.item != displayedItems.count - 1) {
+            if displayedItems[indexPath.item] is DisplayedWeatherProtocol {
                 let cell = collectionView.cellForItem(at: indexPath) as! ListWeathersCell
                 cell.isInEditingMode = editing
             }
@@ -141,20 +162,5 @@ extension ListWeathersViewController {
             }
         }
     }
-}
-
-//MARK: CollectionViewDelegate
-
-extension ListWeathersViewController {
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        if indexPath.item != 0 && indexPath.item != displayedItems.count - 1 {
-            return true
-        }
-        else {
-            return false
-        }
-    }
-    
-    
 }
 

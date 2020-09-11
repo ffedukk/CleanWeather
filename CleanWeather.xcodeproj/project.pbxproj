@@ -37,6 +37,7 @@
 		30A931F4250A5E2C0098D51D /* ListWeathersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931F3250A5E2C0098D51D /* ListWeathersCell.swift */; };
 		30A931F6250A5E510098D51D /* ListWeathersCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931F5250A5E510098D51D /* ListWeathersCollectionViewLayout.swift */; };
 		30A931FA250A65C90098D51D /* ListWeathersButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931F9250A65C90098D51D /* ListWeathersButtonsCell.swift */; };
+		30A931FC250B72210098D51D /* ListWeathersLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931FB250B72210098D51D /* ListWeathersLocationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		30A931F3250A5E2C0098D51D /* ListWeathersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWeathersCell.swift; sourceTree = "<group>"; };
 		30A931F5250A5E510098D51D /* ListWeathersCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWeathersCollectionViewLayout.swift; sourceTree = "<group>"; };
 		30A931F9250A65C90098D51D /* ListWeathersButtonsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWeathersButtonsCell.swift; sourceTree = "<group>"; };
+		30A931FB250B72210098D51D /* ListWeathersLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWeathersLocationCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,9 +206,10 @@
 		30A931F2250A5DFE0098D51D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				30A931F5250A5E510098D51D /* ListWeathersCollectionViewLayout.swift */,
+				30A931FB250B72210098D51D /* ListWeathersLocationCell.swift */,
 				30A931F3250A5E2C0098D51D /* ListWeathersCell.swift */,
 				30A931F9250A65C90098D51D /* ListWeathersButtonsCell.swift */,
+				30A931F5250A5E510098D51D /* ListWeathersCollectionViewLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				30A931E2250533660098D51D /* PlistAccess.swift in Sources */,
 				30A931CC250519950098D51D /* ManagedWeather.swift in Sources */,
 				30A931D8250529BF0098D51D /* NetworkManager.swift in Sources */,
+				30A931FC250B72210098D51D /* ListWeathersLocationCell.swift in Sources */,
 				30A931A625050B0F0098D51D /* ListWeathersViewController.swift in Sources */,
 				30A931A225050B0F0098D51D /* AppDelegate.swift in Sources */,
 				30A931BB25050E750098D51D /* ListWeathersInteractor.swift in Sources */,

@@ -22,6 +22,10 @@ class LocationWorker: NSObject, CLLocationManagerDelegate {
         setupLocation()
     }
     
+    func startUpdateLocation() {
+        locationManager.startUpdatingLocation()
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
 
@@ -36,7 +40,6 @@ class LocationWorker: NSObject, CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
         }
     }
 }
