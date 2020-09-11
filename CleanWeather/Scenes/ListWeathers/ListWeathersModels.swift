@@ -9,23 +9,23 @@
 import UIKit
 
 
-protocol ViewModelProtocol {
+protocol ListWeathersViewModelProtocol {
     var identifire: String { get }
 }
 
-protocol DisplayedWeatherLocationProtocol: ViewModelProtocol {
+protocol ListWeathersDisplayedLocationProtocol: ListWeathersViewModelProtocol {
     var placeName: String { get }
     var icon: String { get }
     var temperature: String { get }
 }
 
-protocol DisplayedWeatherProtocol: ViewModelProtocol {
+protocol ListWeathersDisplayedProtocol: ListWeathersViewModelProtocol {
     var placeName: String { get }
     var icon: String { get }
     var temperature: String { get }
 }
 
-protocol DisplayedWeatherButtonsProtocol: ViewModelProtocol {
+protocol ListWeathersDisplayedButtonsProtocol: ListWeathersViewModelProtocol {
     
 }
 
@@ -46,23 +46,23 @@ enum ListWeathers
         }
         struct ViewModel
         {
-            struct DisplayedWeatherLocation: DisplayedWeatherLocationProtocol {
+            struct DisplayedWeatherLocation: ListWeathersDisplayedLocationProtocol {
                 let identifire = "listWeathersLocationCell"
                 var placeName: String
                 var icon: String
                 var temperature: String
             }
-            struct DisplayedWeather: DisplayedWeatherProtocol
+            struct DisplayedWeather: ListWeathersDisplayedProtocol
             {
                 let identifire = "listWeathersCell"
                 var placeName: String
                 var icon: String
                 var temperature: String
             }
-            struct Buttons: DisplayedWeatherButtonsProtocol {
+            struct Buttons: ListWeathersDisplayedButtonsProtocol {
                 let identifire = "listWeathersButtonsCell"
             }
-            var displayedItems: [ViewModelProtocol]
+            var displayedItems: [ListWeathersViewModelProtocol]
         }
     }
 }

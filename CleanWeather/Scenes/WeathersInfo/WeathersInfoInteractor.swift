@@ -13,6 +13,7 @@ import UIKit
 protocol WeathersInfoBusinessLogic
 {
     func fetchWeathersFromCoreData(request: WeathersInfo.FetchWeathers.Request)
+    func fetchWeathers()
     func updateWeathers()
     func addWeather(place: String)
     func deleteWeather(at index: Int)
@@ -75,6 +76,11 @@ class WeathersInfoInteractor: WeathersInfoBusinessLogic, WeathersInfoDataStore, 
     }
     
 //    MARK: Fetching
+    
+    func fetchWeathers() {
+        let response = WeathersInfo.FetchWeathers.Response(weathers: self.weathers!)
+        self.presenter?.presentFetchedWeathers(response: response)
+    }
     
     func fetchWeathersFromCoreData(request: WeathersInfo.FetchWeathers.Request) {
         coreDataWorker.fetch { [weak self] (managedWeathers) in

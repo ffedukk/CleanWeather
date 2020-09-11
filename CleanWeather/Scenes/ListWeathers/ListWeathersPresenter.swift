@@ -22,10 +22,10 @@ class ListWeathersPresenter: ListWeathersPresentationLogic {
     weak var viewController: ListWeathersDisplayLogic?
     
     func presentFetchedWeathers(response: ListWeathers.FetchWeathers.Response) {
-        var displayedWeathers: [ViewModelProtocol] = []
+        var displayedWeathers: [ListWeathersViewModelProtocol] = []
         
         for (index, weather) in response.weathers.enumerated() {
-            let displayedWeather: ViewModelProtocol
+            let displayedWeather: ListWeathersViewModelProtocol
             
             let icon = "Main" + weather.icon
             let temperature = fromKelvinToCelcius(kelvin: weather.temperature)

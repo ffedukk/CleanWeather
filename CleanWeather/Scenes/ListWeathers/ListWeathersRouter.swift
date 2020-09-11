@@ -21,7 +21,6 @@ protocol ListWeathersDataPassing
 
 class ListWeathersRouter: ListWeathersRoutingLogic, ListWeathersDataPassing
 {
-
     weak var viewController: ListWeathersViewController?
     var dataStore: ListWeathersDataStore?
     
@@ -34,7 +33,7 @@ class ListWeathersRouter: ListWeathersRoutingLogic, ListWeathersDataPassing
     
     func navigateToShowOrder(source: ListWeathersViewController, destination: WeathersInfoViewController)
     {
-      source.show(destination, sender: nil)
+        source.show(destination, sender: nil)
     }
     
     func passDataToShowOrder(source: ListWeathersDataStore, destination: inout WeathersInfoDataStore)

@@ -19,7 +19,7 @@ protocol WeathersInfoDataPassing
     var dataStore: WeathersInfoDataStore? { get }
 }
 
-class WeathersInfoRouter: NSObject, WeathersInfoRoutingLogic, WeathersInfoDataPassing {
+class WeathersInfoRouter: WeathersInfoRoutingLogic, WeathersInfoDataPassing {
     weak var viewController: WeathersInfoViewController?
     var dataStore: WeathersInfoDataStore?
     

@@ -70,7 +70,7 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     
     //    MARK: Display
     
-    var displayedItems: [ViewModelProtocol] = []
+    var displayedItems: [ListWeathersViewModelProtocol] = []
     
     func displayFetchedWeathers(viewModel: ListWeathers.FetchWeathers.ViewModel) {
         displayedItems = viewModel.displayedItems
@@ -107,6 +107,7 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
 
 extension ListWeathersViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("\(collectionView.contentSize)")
         return displayedItems.count
     }
     
@@ -123,7 +124,7 @@ extension ListWeathersViewController {
 
 extension ListWeathersViewController {
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        if displayedItems[indexPath.item] is DisplayedWeatherProtocol {
+        if displayedItems[indexPath.item] is ListWeathersDisplayedProtocol {
             return true
         } else {
             return false
@@ -139,7 +140,7 @@ extension ListWeathersViewController {
         collectionView.allowsMultipleSelection = editing
         let indexPaths = collectionView.indexPathsForVisibleItems
         for indexPath in indexPaths {
-            if displayedItems[indexPath.item] is DisplayedWeatherProtocol {
+            if displayedItems[indexPath.item] is ListWeathersDisplayedProtocol {
                 let cell = collectionView.cellForItem(at: indexPath) as! ListWeathersCell
                 cell.isInEditingMode = editing
             }

@@ -22,7 +22,7 @@ class WeathersInfoPresenter: WeathersInfoPresentationLogic {
     weak var viewController: WeathersInfoDisplayLogic?
     
     func presentFetchedWeathers(response: WeathersInfo.FetchWeathers.Response) {
-        var displayedWeathers: [WeathersInfo.FetchWeathers.ViewModel.DisplayedWeather] = []
+        var displayedWeathers: [WeathersInfoDisplayedTownProtocol] = []
         
         for weather in response.weathers {
             
@@ -31,29 +31,33 @@ class WeathersInfoPresenter: WeathersInfoPresentationLogic {
             let temperatureMax = fromKelvinToCelcius(kelvin: weather.temperatureMax)
             let temperatureMin = fromKelvinToCelcius(kelvin: weather.temperatureMin)
             
-            let header = WeathersInfo.FetchWeathers.ViewModel.DisplayedWeather.Town.Header(placeName: weather.placeName, weatherDescription: weather.weatherDescription, temperature: temperature, temperatureMax: temperatureMax, temperatureMin: temperatureMin)
+            let header = WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.Header(placeName: weather.placeName, weatherDescription: weather.weatherDescription, temperature: temperature, temperatureMax: temperatureMax, temperatureMin: temperatureMin)
             
-            var forecastDateArray: [WeathersInfo.FetchWeathers.ViewModel.DisplayedWeather.Town.DisplayedForecasts.ForecastForTime] = []
+            var forecastDateArray: [WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.DisplayedForecasts.ForecastForTime] = []
             for forecast in weather.forecastList {
                 let time = fromDateToTime(date: forecast.time)
                 let forcastTemperature = fromKelvinToCelcius(kelvin: forecast.temperature)
-                forecastDateArray.append(WeathersInfo.FetchWeathers.ViewModel.DisplayedWeather.Town.DisplayedForecasts.ForecastForTime(time: time, temperature: forcastTemperature, icon: forecast.icon))
+                forecastDateArray.append(WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.DisplayedForecasts.ForecastForTime(time: time, temperature: forcastTemperature, icon: forecast.icon))
             }
             
-            let displayedForecast = WeathersInfo.FetchWeathers.ViewModel.DisplayedWeather.Town.DisplayedForecasts(displayedForecast: forecastDateArray)
+            let displayedForecast = WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.DisplayedForecasts(displayedForecast: forecastDateArray)
             
             let sunrise = fromIntToDate(integer: weather.sunrise)
             let sunset = fromIntToDate(integer: weather.sunset)
             let feelsLike = fromKelvinToCelcius(kelvin: weather.feelsLike)
             let pressure = fromHPAtoMM(hpa: weather.pressure)
+
+            let sunriseView = WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.AdditionalInfo(title: "Sunrise", data: sunrise)
+            let sunsetView = WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.AdditionalInfo(title: "Sunset", data: sunset)
+            let windView = WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.AdditionalInfo(title: "Wind Speed", data: String(weather.windSpeed))
+            let feelsView = WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.AdditionalInfo(title: "Feels Like", data: feelsLike)
+            let pressureView = WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.AdditionalInfo(title: "Pressure", data: pressure)
             
-            let additionalInfo = WeathersInfo.FetchWeathers.ViewModel.DisplayedWeather.Town.AdditionalInfo(sunriseDescription: "Sunrise", sunrise: sunrise, sunsetDescription: "Sunset", sunset: sunset, windSpeedDescription: "Wind Speed", windSpeed: String(weather.windSpeed), feelsLikeDescription: "Feels Like", feelsLike: feelsLike, pressureDescription: "Pressure", pressure: pressure)
+            let displayedViews: [DisplayedViewsForTownProtocol] = [header, displayedForecast, sunriseView, sunsetView, windView, feelsView, pressureView]
             
-            let town = WeathersInfo.FetchWeathers.ViewModel.DisplayedWeather.Town(icon: icon, header: header, listOfForecast: displayedForecast, additionalInfo: additionalInfo)
-            
-            let displayedWeather = WeathersInfo.FetchWeathers.ViewModel.DisplayedWeather(town: town)
-            
-            displayedWeathers.append(displayedWeather)
+            let town = WeathersInfo.FetchWeathers.ViewModel.DisplayedTown(icon: icon, displayedViewsForTown: displayedViews)
+                        
+            displayedWeathers.append(town)
         }
         
         let viewModel = WeathersInfo.FetchWeathers.ViewModel(displayedWeathers: displayedWeathers)

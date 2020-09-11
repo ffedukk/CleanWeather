@@ -94,8 +94,8 @@ class ListWeathersCell: ListWeathersBaseCell {
     
 //    MARK: Logic
 
-    override func setCell(weather: ViewModelProtocol) {
-        let weather = weather as! DisplayedWeatherProtocol
+    override func setCell(weather: ListWeathersViewModelProtocol) {
+        let weather = weather as! ListWeathersDisplayedProtocol
         
         placeNameLabel.text = weather.placeName
         temperatureLabel.text = weather.temperature
