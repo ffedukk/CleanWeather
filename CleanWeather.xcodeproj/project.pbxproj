@@ -39,6 +39,7 @@
 		30A931FA250A65C90098D51D /* ListWeathersButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931F9250A65C90098D51D /* ListWeathersButtonsCell.swift */; };
 		30A931FC250B72210098D51D /* ListWeathersLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931FB250B72210098D51D /* ListWeathersLocationCell.swift */; };
 		30A931FE250B7E4A0098D51D /* ListWeathersBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931FD250B7E4A0098D51D /* ListWeathersBaseCell.swift */; };
+		30A93200250B9DAE0098D51D /* ListWeathersRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A931FF250B9DAE0098D51D /* ListWeathersRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		30A931F9250A65C90098D51D /* ListWeathersButtonsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWeathersButtonsCell.swift; sourceTree = "<group>"; };
 		30A931FB250B72210098D51D /* ListWeathersLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWeathersLocationCell.swift; sourceTree = "<group>"; };
 		30A931FD250B7E4A0098D51D /* ListWeathersBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWeathersBaseCell.swift; sourceTree = "<group>"; };
+		30A931FF250B9DAE0098D51D /* ListWeathersRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWeathersRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				30A931C1250511DD0098D51D /* CoreDataWorker.swift */,
 				30A931CF25051E4F0098D51D /* NetworkWorker.swift */,
 				30A931E52507F43A0098D51D /* LocationWorker.swift */,
+				30A931FF250B9DAE0098D51D /* ListWeathersRouter.swift */,
 			);
 			path = ListWeathers;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				30A931E9250A53CF0098D51D /* WeathersInfoViewController.swift in Sources */,
 				30A931F4250A5E2C0098D51D /* ListWeathersCell.swift in Sources */,
 				30A931D325051EC80098D51D /* CoreDataManager.swift in Sources */,
+				30A93200250B9DAE0098D51D /* ListWeathersRouter.swift in Sources */,
 				30A931DD25052DA10098D51D /* ParserProtocol.swift in Sources */,
 				30A931D025051E4F0098D51D /* NetworkWorker.swift in Sources */,
 				30A931F6250A5E510098D51D /* ListWeathersCollectionViewLayout.swift in Sources */,

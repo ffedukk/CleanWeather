@@ -20,6 +20,7 @@ protocol ListWeathersDisplayLogic: class
 class ListWeathersViewController: UICollectionViewController, ListWeathersDisplayLogic {
     
     var interactor: ListWeathersBusinessLogic?
+    var router: (NSObjectProtocol & ListWeathersRoutingLogic & ListWeathersDataPassing)?
     
     //    MARK: Init
     
@@ -38,13 +39,13 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
         let viewController = self
         let interactor = ListWeathersInteractor()
         let presenter = ListWeathersPresenter()
-        //let router = ListOrdersRouter()
+        let router = ListWeathersRouter()
         viewController.interactor = interactor
-        //viewController.router = router
+        viewController.router = router
         interactor.presenter = presenter
         presenter.viewController = viewController
-        //router.viewController = viewController
-        //router.dataStore = interactor
+        router.viewController = viewController
+        router.dataStore = interactor
         
         collectionView.setCollectionViewLayout(ListWeathersCollectionViewLayout(), animated: false)
         collectionView.showsHorizontalScrollIndicator = false

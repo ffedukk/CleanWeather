@@ -12,7 +12,5 @@ class ListWeathersBaseCell: UICollectionViewCell {
     
     var isInEditingMode = false
     
-    func setCell(weather: ViewModelProtocol) {
-
-    }
+    func setCell(weather: ViewModelProtocol) {}
 }

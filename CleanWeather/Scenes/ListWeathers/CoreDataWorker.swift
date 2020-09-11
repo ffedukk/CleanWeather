@@ -20,12 +20,6 @@ class CoreDataWorker {
     func add(weatherData: [String:Any], forecastData: [[String:Any]], completion: @escaping (ManagedWeather) -> ()) {
         guard let coreDataManager = coreDataManager else { return }
         
-//        if townsNames.contains(weatherData["name"] as! String) {
-//            return
-//        } else {
-//            townsNames.append(weatherData["name"] as! String)
-//        }
-        
         let newWeather = ManagedWeather.create(weatherData: weatherData, forecastData: forecastData, managedContext: coreDataManager.persistentContainer.viewContext)
         
         managedObjects.append(newWeather)
@@ -52,15 +46,7 @@ class CoreDataWorker {
         for managedObject in fetchedList {
             managedWeathers.append(managedObject as! ManagedWeather)
         }
-        
         completion(managedWeathers)
-//        weathers = fetchedList
-        
-//        townsNames.removeAll()
-//        for weather in weathers {
-//            townsNames.append((weather as! Weather).townName!)
-//        }
-        
     }
     
 //    MARK: Deletion
