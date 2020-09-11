@@ -18,7 +18,7 @@ class ListWeathersCell: ListWeathersBaseCell {
     
     private var back = UIImageView()
     
-    var isInEditingMode: Bool = false {
+    override var isInEditingMode: Bool {
         didSet {
             checkmarkLabel.isHidden = !isInEditingMode
             checkmarkLabel.textColor = .gray
@@ -96,6 +96,7 @@ class ListWeathersCell: ListWeathersBaseCell {
 
     override func setCell(weather: ViewModelProtocol) {
         let weather = weather as! DisplayedWeatherProtocol
+        
         placeNameLabel.text = weather.placeName
         temperatureLabel.text = weather.temperature
         isInEditingMode = false

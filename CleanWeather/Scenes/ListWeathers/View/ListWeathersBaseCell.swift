@@ -10,8 +10,8 @@ import UIKit
 
 class ListWeathersBaseCell: UICollectionViewCell {
     
-//    MARK: Logic
-
+    var isInEditingMode = false
+    
     func setCell(weather: ViewModelProtocol) {
 
     }

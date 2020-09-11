@@ -112,6 +112,7 @@ extension ListWeathersViewController {
         let modelItem = displayedItems[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: modelItem.identifire, for: indexPath) as! ListWeathersBaseCell
         cell.setCell(weather: modelItem)
+        cell.isInEditingMode = isEditing
         return cell
     }
 }

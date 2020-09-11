@@ -37,7 +37,6 @@ class ListWeathersButtonsCell: ListWeathersBaseCell {
         addSubview(editButton)
         editButton.addTarget(nil, action: Selector(("editButtonPressed")), for: .touchUpInside)
         
-        //deleteButton.isEnabled = false
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(deleteButton)
         deleteButton.addTarget(nil, action: Selector(("deleteButtonPressed")), for: .touchUpInside)
@@ -55,7 +54,4 @@ class ListWeathersButtonsCell: ListWeathersBaseCell {
             deleteButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
         ])
     }
-    
-    
-
 }
