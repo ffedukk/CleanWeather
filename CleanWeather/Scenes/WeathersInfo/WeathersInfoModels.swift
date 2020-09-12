@@ -37,12 +37,18 @@ protocol WeathersInfoDisplayedHeaderProtocol: DisplayedViewsForTownProtocol {
 }
 
 protocol WeathersInfoDisplayedForecastsProtocol: DisplayedViewsForTownProtocol {
-    var displayedForecast: [WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.DisplayedForecasts.ForecastForTime] { get }
+    var displayedForecast: [WeathersInfoForecastForTimeProtocol] { get }
 }
 
 protocol WeathersInfoDisplayedAdditionalInfoProtocol: DisplayedViewsForTownProtocol {
     var title: String { get }
     var data: String { get }
+}
+
+protocol WeathersInfoForecastForTimeProtocol: DisplayedViewsForTownProtocol {
+    var time: String { get }
+    var temperature: String { get }
+    var icon: String { get }
 }
 
 enum WeathersInfo
@@ -63,9 +69,6 @@ enum WeathersInfo
             struct DisplayedTown: WeathersInfoDisplayedTownProtocol {
                 var identifire = "weathersInfoCell"
                 var icon: String
-                //var header: Header
-                //var listOfForecast: DisplayedForecasts
-                //var additionalInfo: AdditionalInfo
                 
                 struct Header: WeathersInfoDisplayedHeaderProtocol {
                     var identifire: String = "weathersInfoHeaderCell"
@@ -77,12 +80,13 @@ enum WeathersInfo
                 }
                 struct DisplayedForecasts: WeathersInfoDisplayedForecastsProtocol {
                     var identifire: String = "weathersInfoForecastsCell"
-                    struct ForecastForTime {
+                    struct ForecastForTime: WeathersInfoForecastForTimeProtocol {
+                        var identifire: String = "weathersInfoForecastForTimeCell"
                         var time: String
                         var temperature: String
                         var icon: String
                     }
-                    var displayedForecast: [ForecastForTime]
+                    var displayedForecast: [WeathersInfoForecastForTimeProtocol]
                 }
                 struct AdditionalInfo: WeathersInfoDisplayedAdditionalInfoProtocol {
                     var identifire: String = "weathersInfoAdditionalInfoCell"

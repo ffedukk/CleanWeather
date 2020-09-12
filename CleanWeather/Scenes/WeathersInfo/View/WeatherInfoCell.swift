@@ -42,7 +42,6 @@ class WeatherInfoCell: UICollectionViewCell{
     override func prepareForReuse() {
         super.prepareForReuse()
         townViews = nil
-        back.removeFromSuperview()
         townCollectionView.reloadData()
     }
     
@@ -68,9 +67,7 @@ class WeatherInfoCell: UICollectionViewCell{
         back.contentMode = .scaleAspectFill
         back.clipsToBounds = true
         back.image = image
-        addSubview(back)
-        sendSubviewToBack(back)
-        
+        self.backgroundView = back
     }
 }
 
@@ -90,40 +87,3 @@ extension WeatherInfoCell: UICollectionViewDataSource {
         return cell
     }
 }
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let town = town else {
-//        fatalError()
-//        }
-        
-//        switch indexPath.item {
-//        case 1:
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "forecastListCell", for: indexPath) as! ForecastListCell
-//            cell.setCell(with: town.retrieveForecastList())
-//            return cell
-//        case 2:
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "infoCell", for: indexPath) as! AdditionalInfoCell
-//            cell.setCell(description: "Sunrise", info: town.retrieveSunrise())
-//            return cell
-//        case 3:
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "infoCell", for: indexPath) as! AdditionalInfoCell
-//            cell.setCell(description: "Sunset", info: town.retrieveSunset())
-//            return cell
-//        case 4:
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "infoCell", for: indexPath) as! AdditionalInfoCell
-//            cell.setCell(description: "Wind", info: town.retrieveWindSpeed())
-//            return cell
-//        case 5:
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "infoCell", for: indexPath) as! AdditionalInfoCell
-//            cell.setCell(description: "Feels Like", info: town.retrieveFeelsLike())
-//            return cell
-//        case 6:
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "infoCell", for: indexPath) as! AdditionalInfoCell
-//            cell.setCell(description: "Pressure", info: town.retrievePressure())
-//            return cell
-//        default:
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headCell", for: indexPath) as! HeadCell
-//            cell.setCell(with: town)
-//            return cell
-//        }
-//    }
-//}

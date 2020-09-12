@@ -22,6 +22,8 @@ class WeathersInfoViewController: UICollectionViewController, WeathersInfoDispla
     var interactor: WeathersInfoBusinessLogic?
     var router: (WeathersInfoRoutingLogic & WeathersInfoDataPassing)?
     
+    let pageControl = UIPageControl()
+    
     //    MARK: Init
     
     override init(collectionViewLayout layout: UICollectionViewLayout) {
@@ -49,21 +51,52 @@ class WeathersInfoViewController: UICollectionViewController, WeathersInfoDispla
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        collectionView.isPagingEnabled = true
         collectionView.setCollectionViewLayout(layout, animated: false)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.contentInsetAdjustmentBehavior = .scrollableAxes
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(WeatherInfoCell.self, forCellWithReuseIdentifier: "weathersInfoCell")
+        
+        
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.isUserInteractionEnabled = false
+        pageControl.numberOfPages = 5
+        view.addSubview(pageControl)
+    }
+    
+    private func constraintsInit() {
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
+            pageControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            pageControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            pageControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            pageControl.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
     
     //    MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         interactor?.fetchWeathers()
+        constraintsInit()
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
     }
     
     //    MARK: Display
@@ -103,7 +136,7 @@ extension WeathersInfoViewController {
 
 extension WeathersInfoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
 }
 

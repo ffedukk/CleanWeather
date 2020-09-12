@@ -80,7 +80,7 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     //   MARK: Buttons
     
     @objc func addButtonPressed() {
-        //interactor?.addWeather(place: "moscow")
+//        interactor?.addWeather(place: "moscow")
         router?.routeToMainWeather()
     }
     
@@ -107,7 +107,6 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
 
 extension ListWeathersViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("\(collectionView.contentSize)")
         return displayedItems.count
     }
     

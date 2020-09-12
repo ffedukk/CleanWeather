@@ -19,6 +19,8 @@ class WeathersInfoForecastsCell: WeathersInfoBaseCell {
         return collectionView
     }()
     
+    var displayedForecasts: [WeathersInfoForecastForTimeProtocol] = []
+    
 //    MARK: Init
     
     override init(frame: CGRect) {
@@ -27,9 +29,9 @@ class WeathersInfoForecastsCell: WeathersInfoBaseCell {
         forecastCollectionView.backgroundColor = .clear
         forecastCollectionView.showsHorizontalScrollIndicator = false
         addSubview(forecastCollectionView)
-       // forecastCollectionView.dataSource = self
-       // forecastCollectionView.delegate = self
-       // forecastCollectionView.register(ForecastCell.self, forCellWithReuseIdentifier: "forecastCell")
+        forecastCollectionView.dataSource = self
+        forecastCollectionView.delegate = self
+        forecastCollectionView.register(WeathersInfoForecastForTimeCell.self, forCellWithReuseIdentifier: "weathersInfoForecastForTimeCell")
         forecastCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         constraintsInit()
@@ -58,6 +60,41 @@ class WeathersInfoForecastsCell: WeathersInfoBaseCell {
 //    MARK: Logic
     
     override func setCell(with model: DisplayedViewsForTownProtocol) {
-        //self.forecastList = forecastList
+        let model = model as! WeathersInfoDisplayedForecastsProtocol
+        displayedForecasts = model.displayedForecast
+        forecastCollectionView.reloadData()
+    }
+}
+
+//MARK: CollectionViewDataSource
+
+extension WeathersInfoForecastsCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return displayedForecasts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let modelItem = displayedForecasts[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: modelItem.identifire, for: indexPath) as! WeathersInfoBaseCell
+        cell.setCell(with: modelItem)
+        return cell
+    }
+    
+    
+}
+
+//MARK: CollectionViewDelegate
+
+extension WeathersInfoForecastsCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+
+//MARK: CollectionViewDelegateFlowLayout
+
+extension WeathersInfoForecastsCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 80, height: 90)
     }
 }

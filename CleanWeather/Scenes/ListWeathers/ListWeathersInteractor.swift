@@ -58,7 +58,7 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
         locationWorker.startUpdateLocation()
         
         for index in 1..<weathers!.count {
-            
+
             let place = weathers![index].placeName
             let weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=\(place)&appid=\(weatherAPIKey)"
             let forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=\(place)&appid=\(weatherAPIKey)"
