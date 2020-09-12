@@ -123,17 +123,21 @@ extension ListWeathersViewController {
 
 extension ListWeathersViewController {
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        if displayedItems[indexPath.item] is ListWeathersDisplayedProtocol {
-            return true
-        } else {
+        if displayedItems[indexPath.item] is ListWeathersDisplayedButtonsProtocol {
             return false
+        }
+        if isEditing {
+            return displayedItems[indexPath.item] is ListWeathersDisplayedProtocol ? true : false
+        } else {
+            return true
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard !isEditing else { return }
-        router?.routeToMainWeather()
+        router?.routeToMainWeather(selectedCell: indexPath.item)
     }
+    
 }
 
 //MARK: Set Editind

@@ -10,8 +10,7 @@ import UIKit
 
 @objc protocol ListWeathersRoutingLogic
 {
-    func routeToMainWeather()
-    
+    func routeToMainWeather(selectedCell: Int)
 }
 
 protocol ListWeathersDataPassing
@@ -24,8 +23,8 @@ class ListWeathersRouter: ListWeathersRoutingLogic, ListWeathersDataPassing
     weak var viewController: ListWeathersViewController?
     var dataStore: ListWeathersDataStore?
     
-    func routeToMainWeather() {
-        let destinationVC = WeathersInfoViewController()
+    func routeToMainWeather(selectedCell: Int) {
+        let destinationVC = WeathersInfoViewController(startPosition: selectedCell)
         var destinationDS = destinationVC.router!.dataStore!
         passDataToShowOrder(source: dataStore!, destination: &destinationDS)
         navigateToShowOrder(source: viewController!, destination: destinationVC)

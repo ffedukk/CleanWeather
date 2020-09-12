@@ -23,10 +23,12 @@ class WeathersInfoViewController: UICollectionViewController, WeathersInfoDispla
     var router: (WeathersInfoRoutingLogic & WeathersInfoDataPassing)?
     
     let pageControl = UIPageControl()
+    let startPosition: Int
     
     //    MARK: Init
     
-    init() {
+    init(startPosition: Int) {
+        self.startPosition = startPosition
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         super.init(collectionViewLayout: layout)
@@ -79,21 +81,16 @@ class WeathersInfoViewController: UICollectionViewController, WeathersInfoDispla
     
     //    MARK: Life cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        interactor?.fetchWeathers()
         constraintsInit()
-
-    }
+        interactor?.fetchWeathers()
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
+        DispatchQueue.main.async {
+            self.collectionView.scrollToItem(at: IndexPath(item: self.startPosition, section: 0), at: .centeredHorizontally, animated: false)
+            self.pageControl.currentPage = self.startPosition
+        }
+        
     }
     
     //    MARK: Display
@@ -104,6 +101,10 @@ class WeathersInfoViewController: UICollectionViewController, WeathersInfoDispla
         displayedWeathers = viewModel.displayedWeathers
         collectionView.reloadData()
         pageControl.numberOfPages = displayedWeathers.count
+    }
+    
+    deinit {
+        print("deinit")
     }
 }
 
@@ -128,17 +129,18 @@ extension WeathersInfoViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        pageControl.currentPage = Int(targetContentOffset.pointee.x / view.frame.width)
+    }
 }
+
+
 
 //    MARK: CollectionViewDelegateFlowLayout
 
 extension WeathersInfoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
-    }
-    
-    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        pageControl.currentPage = Int(targetContentOffset.pointee.x / view.frame.width)
     }
 }
 
