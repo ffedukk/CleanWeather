@@ -53,13 +53,13 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
 //    MARK: Updating
         
     func updateWeathers() {
-        guard let _ = weathers else { return }
         
         locationWorker.startUpdateLocation()
+        guard var weathers = weathers, !weathers.isEmpty else { return }
         
-        for index in 1..<weathers!.count {
+        for index in 1..<weathers.count {
 
-            let place = weathers![index].placeName
+            let place = weathers[index].placeName
             let weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=\(place)&appid=\(weatherAPIKey)"
             let forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=\(place)&appid=\(weatherAPIKey)"
 
@@ -67,7 +67,7 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
                 guard let self = self else { return }
                 self.coreDataWorker.updateItem(weatherData: weatherData, forecastData: forecastData, at: index) { (managedWeather) in
                     if let updatedWeather = Weather(with: managedWeather) {
-                        self.weathers![index] = updatedWeather
+                        weathers[index] = updatedWeather
                     }
                 }
             }
@@ -79,6 +79,7 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
 //    MARK: Fetching
     
     func fetchWeathersFromCoreData(request: ListWeathers.FetchWeathers.Request) {
+        
         coreDataWorker.fetch { [weak self] (managedWeathers) in
             guard let self = self else { return }
             var fetchedWeathers: [Weather] = []
@@ -96,6 +97,7 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
 //    MARK: Adding
     
     func addWeather(place: String) {
+        
         let weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=\(place)&appid=\(weatherAPIKey)"
         let forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=\(place)&appid=\(weatherAPIKey)"
 

@@ -60,11 +60,12 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.fetchWeathersFromCoreData(request: ListWeathers.FetchWeathers.Request())
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        //interactor?.updateWeathers()
+        
         interactor?.updateWeathers()
     }
     
@@ -80,8 +81,7 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     //   MARK: Buttons
     
     @objc func addButtonPressed() {
-//        interactor?.addWeather(place: "moscow")
-        router?.routeToMainWeather()
+        interactor?.addWeather(place: "moscow")
     }
     
     @objc func editButtonPressed() {
@@ -128,6 +128,11 @@ extension ListWeathersViewController {
         } else {
             return false
         }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard !isEditing else { return }
+        router?.routeToMainWeather()
     }
 }
 

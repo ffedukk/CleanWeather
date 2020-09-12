@@ -12,25 +12,25 @@ class WeathersInfoHeaderCell: WeathersInfoBaseCell {
     
 //    MARK: Properties
     
-    private let townNameLabel = UILabel()
+    private let placeNameLabel = UILabel()
     private let weatherDescriptionLabel = UILabel()
-    private let tempLabel = UILabel()
-    private let tempMaxLabel = UILabel()
-    private let tempMinLabel = UILabel()
+    private let temperatureLabel = UILabel()
+    private let temperatureMaxLabel = UILabel()
+    private let temperatureMinLabel = UILabel()
     
 //    MARK: Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        townNameLabel.textAlignment = .center
-        townNameLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 35)
-        townNameLabel.textColor = .white
-        townNameLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
-        townNameLabel.layer.shadowRadius = 2
-        townNameLabel.layer.shadowOpacity = 1
-        townNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(townNameLabel)
+        placeNameLabel.textAlignment = .center
+        placeNameLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 35)
+        placeNameLabel.textColor = .white
+        placeNameLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
+        placeNameLabel.layer.shadowRadius = 2
+        placeNameLabel.layer.shadowOpacity = 1
+        placeNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(placeNameLabel)
         
         weatherDescriptionLabel.textAlignment = .center
         weatherDescriptionLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 15)
@@ -41,30 +41,30 @@ class WeathersInfoHeaderCell: WeathersInfoBaseCell {
         weatherDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(weatherDescriptionLabel)
         
-        tempLabel.textAlignment = .center
-        tempLabel.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 100)
-        tempLabel.textColor = .white
-        tempLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
-        tempLabel.layer.shadowRadius = 2
-        tempLabel.layer.shadowOpacity = 1
-        tempLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(tempLabel)
+        temperatureLabel.textAlignment = .center
+        temperatureLabel.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 100)
+        temperatureLabel.textColor = .white
+        temperatureLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
+        temperatureLabel.layer.shadowRadius = 2
+        temperatureLabel.layer.shadowOpacity = 1
+        temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(temperatureLabel)
         
-        tempMaxLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)
-        tempMaxLabel.textColor = .white
-        tempMaxLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
-        tempMaxLabel.layer.shadowRadius = 2
-        tempMaxLabel.layer.shadowOpacity = 1
-        tempMaxLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(tempMinLabel)
+        temperatureMaxLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)
+        temperatureMaxLabel.textColor = .white
+        temperatureMaxLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
+        temperatureMaxLabel.layer.shadowRadius = 2
+        temperatureMaxLabel.layer.shadowOpacity = 1
+        temperatureMaxLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(temperatureMinLabel)
         
-        tempMinLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)
-        tempMinLabel.textColor = .white
-        tempMinLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
-        tempMinLabel.layer.shadowRadius = 2
-        tempMinLabel.layer.shadowOpacity = 1
-        tempMinLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(tempMaxLabel)
+        temperatureMinLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)
+        temperatureMinLabel.textColor = .white
+        temperatureMinLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
+        temperatureMinLabel.layer.shadowRadius = 2
+        temperatureMinLabel.layer.shadowOpacity = 1
+        temperatureMinLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(temperatureMaxLabel)
         
         initConstraints()
     }
@@ -77,34 +77,34 @@ class WeathersInfoHeaderCell: WeathersInfoBaseCell {
     
     private func initConstraints() {
         NSLayoutConstraint.activate([
-            townNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 75),
-            townNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            townNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            placeNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 75),
+            placeNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            placeNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             
-            weatherDescriptionLabel.topAnchor.constraint(equalTo: townNameLabel.bottomAnchor, constant: -5),
+            weatherDescriptionLabel.topAnchor.constraint(equalTo: placeNameLabel.bottomAnchor, constant: -5),
             weatherDescriptionLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             weatherDescriptionLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
 
-            tempLabel.topAnchor.constraint(equalTo: weatherDescriptionLabel.bottomAnchor),
-            tempLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            tempLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            temperatureLabel.topAnchor.constraint(equalTo: weatherDescriptionLabel.bottomAnchor),
+            temperatureLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            temperatureLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             
-            tempMinLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5),
-            tempMinLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -5),
+            temperatureMinLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            temperatureMinLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -5),
             
-            tempMaxLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5),
-            tempMaxLabel.trailingAnchor.constraint(equalTo: tempMinLabel.leadingAnchor, constant: -5)
+            temperatureMaxLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            temperatureMaxLabel.trailingAnchor.constraint(equalTo: temperatureMinLabel.leadingAnchor, constant: -5)
         ])
     }
     
 //    MARK: Logic
     
     override func setCell(with model: DisplayedViewsForTownProtocol) {
-        let header = model as! WeathersInfoDisplayedHeaderProtocol
-        townNameLabel.text = header.placeName
-        weatherDescriptionLabel.text = header.weatherDescription
-        tempLabel.text = header.temperature
-        tempMinLabel.text = header.temperatureMin
-        tempMaxLabel.text = header.temperatureMax
+        let model = model as! WeathersInfoDisplayedHeaderProtocol
+        placeNameLabel.text = model.placeName
+        weatherDescriptionLabel.text = model.weatherDescription
+        temperatureLabel.text = model.temperature
+        temperatureMinLabel.text = model.temperatureMin
+        temperatureMaxLabel.text = model.temperatureMax
     }
 }

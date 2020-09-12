@@ -25,7 +25,7 @@ class ListWeathersRouter: ListWeathersRoutingLogic, ListWeathersDataPassing
     var dataStore: ListWeathersDataStore?
     
     func routeToMainWeather() {
-        let destinationVC = WeathersInfoViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let destinationVC = WeathersInfoViewController()
         var destinationDS = destinationVC.router!.dataStore!
         passDataToShowOrder(source: dataStore!, destination: &destinationDS)
         navigateToShowOrder(source: viewController!, destination: destinationVC)

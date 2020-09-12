@@ -14,7 +14,7 @@ class WeathersInfoForecastForTimeCell: WeathersInfoBaseCell {
     
     private let timeLabel = UILabel()
     private let weatherImageView = UIImageView()
-    private let tempLabel = UILabel()
+    private let temperatureLabel = UILabel()
     
 //    MARK: Init
     
@@ -34,14 +34,14 @@ class WeathersInfoForecastForTimeCell: WeathersInfoBaseCell {
         weatherImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(weatherImageView)
         
-        tempLabel.textAlignment = .center
-        tempLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 16)
-        tempLabel.textColor = .white
-        tempLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
-        tempLabel.layer.shadowRadius = 2
-        tempLabel.layer.shadowOpacity = 1
-        tempLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(tempLabel)
+        temperatureLabel.textAlignment = .center
+        temperatureLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 16)
+        temperatureLabel.textColor = .white
+        temperatureLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
+        temperatureLabel.layer.shadowRadius = 2
+        temperatureLabel.layer.shadowOpacity = 1
+        temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(temperatureLabel)
         
         initConstraints()
         
@@ -60,13 +60,13 @@ class WeathersInfoForecastForTimeCell: WeathersInfoBaseCell {
             timeLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
 
             weatherImageView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor),
-            weatherImageView.bottomAnchor.constraint(equalTo: tempLabel.topAnchor),
+            weatherImageView.bottomAnchor.constraint(equalTo: temperatureLabel.topAnchor),
             weatherImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             weatherImageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
 
-            tempLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            tempLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            tempLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
+            temperatureLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            temperatureLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            temperatureLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
     }
     
@@ -76,6 +76,6 @@ class WeathersInfoForecastForTimeCell: WeathersInfoBaseCell {
         let model = model as! WeathersInfoForecastForTimeProtocol
         timeLabel.text = model.time
         weatherImageView.image = UIImage(named: model.icon)
-        tempLabel.text = model.temperature
+        temperatureLabel.text = model.temperature
     }
 }

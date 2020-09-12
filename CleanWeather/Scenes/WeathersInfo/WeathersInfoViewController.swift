@@ -26,7 +26,9 @@ class WeathersInfoViewController: UICollectionViewController, WeathersInfoDispla
     
     //    MARK: Init
     
-    override init(collectionViewLayout layout: UICollectionViewLayout) {
+    init() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
         super.init(collectionViewLayout: layout)
         setup()
     }
@@ -49,20 +51,15 @@ class WeathersInfoViewController: UICollectionViewController, WeathersInfoDispla
         router.viewController = viewController
         router.dataStore = interactor
         
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
         collectionView.isPagingEnabled = true
-        collectionView.setCollectionViewLayout(layout, animated: false)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.contentInsetAdjustmentBehavior = .scrollableAxes
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(WeatherInfoCell.self, forCellWithReuseIdentifier: "weathersInfoCell")
         
-        
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.isUserInteractionEnabled = false
-        pageControl.numberOfPages = 5
         view.addSubview(pageControl)
     }
     
@@ -106,6 +103,7 @@ class WeathersInfoViewController: UICollectionViewController, WeathersInfoDispla
     func displayFetchedWeathers(viewModel: WeathersInfo.FetchWeathers.ViewModel) {
         displayedWeathers = viewModel.displayedWeathers
         collectionView.reloadData()
+        pageControl.numberOfPages = displayedWeathers.count
     }
 }
 
@@ -137,6 +135,10 @@ extension WeathersInfoViewController {
 extension WeathersInfoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        pageControl.currentPage = Int(targetContentOffset.pointee.x / view.frame.width)
     }
 }
 
