@@ -99,7 +99,7 @@ class WeathersInfoHeaderCell: WeathersInfoBaseCell {
     
 //    MARK: Logic
     
-    override func setCell(with model: DisplayedViewsForTownProtocol) {
+    override func setCell(with model: WeathersInfoViewModelProtocol) {
         let model = model as! WeathersInfoDisplayedHeaderProtocol
         placeNameLabel.text = model.placeName
         weatherDescriptionLabel.text = model.weatherDescription

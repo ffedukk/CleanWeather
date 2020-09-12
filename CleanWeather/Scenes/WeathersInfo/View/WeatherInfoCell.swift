@@ -12,7 +12,7 @@ class WeatherInfoCell: UICollectionViewCell{
     
 //    MARK: Properties
     
-    private var townViews: [DisplayedViewsForTownProtocol]?
+    private var townViews: [WeathersInfoViewModelProtocol]?
     private var townCollectionView = UICollectionView(frame: .zero, collectionViewLayout: WeatherInfoCellLayout())
     private var back = UIImageView()
     

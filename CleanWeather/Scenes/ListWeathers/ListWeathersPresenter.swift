@@ -6,7 +6,7 @@
 //  Copyright © 2020 18592232. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 //    MARK: Protocols
 
@@ -22,23 +22,24 @@ class ListWeathersPresenter: ListWeathersPresentationLogic {
     weak var viewController: ListWeathersDisplayLogic?
     
     func presentFetchedWeathers(response: ListWeathers.FetchWeathers.Response) {
-        var displayedWeathers: [ListWeathersViewModelProtocol] = []
+        
+        var displayedItems: [ListWeathersViewModelProtocol] = []
         
         for (index, weather) in response.weathers.enumerated() {
-            let displayedWeather: ListWeathersViewModelProtocol
+            let displayedItem: ListWeathersViewModelProtocol
             
             let icon = "Main" + weather.icon
             let temperature = fromKelvinToCelcius(kelvin: weather.temperature)
             if index == 0 {
-                displayedWeather = ListWeathers.FetchWeathers.ViewModel.DisplayedWeatherLocation(placeName: weather.placeName, icon: icon, temperature: temperature)
+                displayedItem = ListWeathers.FetchWeathers.ViewModel.DisplayedWeatherLocation(placeName: weather.placeName, icon: icon, temperature: temperature)
             } else {
-                displayedWeather = ListWeathers.FetchWeathers.ViewModel.DisplayedWeather(placeName: weather.placeName, icon: icon, temperature: temperature)
+                displayedItem = ListWeathers.FetchWeathers.ViewModel.DisplayedWeather(placeName: weather.placeName, icon: icon, temperature: temperature)
             }
-            displayedWeathers.append(displayedWeather)
+            displayedItems.append(displayedItem)
         }
-        displayedWeathers.append(ListWeathers.FetchWeathers.ViewModel.Buttons())
+        displayedItems.append(ListWeathers.FetchWeathers.ViewModel.Buttons())
         
-        let viewModel = ListWeathers.FetchWeathers.ViewModel(displayedItems: displayedWeathers)
+        let viewModel = ListWeathers.FetchWeathers.ViewModel(displayedItems: displayedItems)
         viewController?.displayFetchedWeathers(viewModel: viewModel)
     }
     

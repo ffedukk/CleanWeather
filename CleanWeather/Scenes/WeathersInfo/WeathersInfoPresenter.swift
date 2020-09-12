@@ -6,7 +6,7 @@
 //  Copyright © 2020 18592232. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 //    MARK: Protocols
 
@@ -22,7 +22,7 @@ class WeathersInfoPresenter: WeathersInfoPresentationLogic {
     weak var viewController: WeathersInfoDisplayLogic?
     
     func presentFetchedWeathers(response: WeathersInfo.FetchWeathers.Response) {
-        var displayedWeathers: [WeathersInfoDisplayedTownProtocol] = []
+        var displayedItems: [WeathersInfoDisplayedTownProtocol] = []
         
         for weather in response.weathers {
             
@@ -53,14 +53,14 @@ class WeathersInfoPresenter: WeathersInfoPresentationLogic {
             let feelsView = WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.AdditionalInfo(title: "Feels Like", data: feelsLike)
             let pressureView = WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.AdditionalInfo(title: "Pressure", data: pressure)
             
-            let displayedViews: [DisplayedViewsForTownProtocol] = [header, displayedForecast, sunriseView, sunsetView, windView, feelsView, pressureView]
+            let displayedViews: [WeathersInfoViewModelProtocol] = [header, displayedForecast, sunriseView, sunsetView, windView, feelsView, pressureView]
             
             let town = WeathersInfo.FetchWeathers.ViewModel.DisplayedTown(icon: icon, displayedViewsForTown: displayedViews)
                         
-            displayedWeathers.append(town)
+            displayedItems.append(town)
         }
         
-        let viewModel = WeathersInfo.FetchWeathers.ViewModel(displayedWeathers: displayedWeathers)
+        let viewModel = WeathersInfo.FetchWeathers.ViewModel(displayedWeathers: displayedItems)
         viewController?.displayFetchedWeathers(viewModel: viewModel)
         
     }

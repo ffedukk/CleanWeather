@@ -9,5 +9,5 @@
 import UIKit
 
 class WeathersInfoBaseCell: UICollectionViewCell {
-    func setCell(with model: DisplayedViewsForTownProtocol) {}
+    func setCell(with model: WeathersInfoViewModelProtocol) {}
 }

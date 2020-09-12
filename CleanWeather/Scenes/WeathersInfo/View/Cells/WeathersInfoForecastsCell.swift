@@ -59,7 +59,7 @@ class WeathersInfoForecastsCell: WeathersInfoBaseCell {
     
 //    MARK: Logic
     
-    override func setCell(with model: DisplayedViewsForTownProtocol) {
+    override func setCell(with model: WeathersInfoViewModelProtocol) {
         let model = model as! WeathersInfoDisplayedForecastsProtocol
         displayedForecasts = model.displayedForecast
         forecastCollectionView.reloadData()

@@ -72,7 +72,7 @@ class WeathersInfoForecastForTimeCell: WeathersInfoBaseCell {
     
 //    MARK: Logic
     
-    override func setCell(with model: DisplayedViewsForTownProtocol) {
+    override func setCell(with model: WeathersInfoViewModelProtocol) {
         let model = model as! WeathersInfoForecastForTimeProtocol
         timeLabel.text = model.time
         weatherImageView.image = UIImage(named: model.icon)

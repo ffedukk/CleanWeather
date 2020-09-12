@@ -6,7 +6,7 @@
 //  Copyright © 2020 18592232. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 
 protocol ListWeathersViewModelProtocol {
@@ -28,8 +28,6 @@ protocol ListWeathersDisplayedProtocol: ListWeathersViewModelProtocol {
 protocol ListWeathersDisplayedButtonsProtocol: ListWeathersViewModelProtocol {
     
 }
-
-
 
 enum ListWeathers
 {

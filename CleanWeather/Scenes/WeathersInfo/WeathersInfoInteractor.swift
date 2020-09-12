@@ -6,17 +6,14 @@
 //  Copyright © 2020 18592232. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 //    MARK: Protocols
 
 protocol WeathersInfoBusinessLogic
 {
-    func fetchWeathersFromCoreData(request: WeathersInfo.FetchWeathers.Request)
     func fetchWeathers()
     func updateWeathers()
-    func addWeather(place: String)
-    func deleteWeather(at index: Int)
 }
 
 protocol WeathersInfoDataStore
@@ -40,16 +37,6 @@ class WeathersInfoInteractor: WeathersInfoBusinessLogic, WeathersInfoDataStore, 
     var weathers: [Weather]?
     
     let weatherAPIKey: String
-    
-//    MARK: Deletion
-    
-    func deleteWeather(at index: Int) {
-        coreDataWorker.deleteFromData(at: index) {
-            weathers?.remove(at: index)
-            let response = WeathersInfo.FetchWeathers.Response(weathers: self.weathers!)
-            self.presenter?.presentFetchedWeathers(response: response)
-        }
-    }
     
 //    MARK: Updating
         
@@ -80,46 +67,6 @@ class WeathersInfoInteractor: WeathersInfoBusinessLogic, WeathersInfoDataStore, 
     func fetchWeathers() {
         let response = WeathersInfo.FetchWeathers.Response(weathers: self.weathers!)
         self.presenter?.presentFetchedWeathers(response: response)
-    }
-    
-    func fetchWeathersFromCoreData(request: WeathersInfo.FetchWeathers.Request) {
-        coreDataWorker.fetch { [weak self] (managedWeathers) in
-            guard let self = self else { return }
-            var fetchedWeathers: [Weather] = []
-            for managedWeather in managedWeathers {
-                if let fetchedWeather = Weather(with: managedWeather) {
-                    fetchedWeathers.append(fetchedWeather)
-                }
-            }
-            self.weathers = fetchedWeathers
-            let response = WeathersInfo.FetchWeathers.Response(weathers: self.weathers!)
-            self.presenter?.presentFetchedWeathers(response: response)
-        }
-    }
-
-//    MARK: Adding
-    
-    func addWeather(place: String) {
-        let weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=\(place)&appid=\(weatherAPIKey)"
-        let forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=\(place)&appid=\(weatherAPIKey)"
-
-        networkWorker.getWeatherData(weatherURL: weatherURL, forecastURL: forecastURL) { [weak self] (weatherData, forecastData) in
-            guard let self = self else { return }
-            
-            self.coreDataWorker.add(weatherData: weatherData, forecastData: forecastData) { [weak self] (managedWeather) in
-                guard let self = self else { return }
-                
-                if let newWeather = Weather(with: managedWeather) {
-                    if let _ = self.weathers {
-                        self.weathers?.append(newWeather)
-                    } else {
-                        self.weathers = [newWeather]
-                    }
-                    let response = WeathersInfo.FetchWeathers.Response(weathers: self.weathers!)
-                    self.presenter?.presentFetchedWeathers(response: response)
-                }
-            }
-        }
     }
     
 //    MARK: Updating Location

@@ -6,12 +6,11 @@
 //  Copyright © 2020 18592232. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-@objc protocol WeathersInfoRoutingLogic
+protocol WeathersInfoRoutingLogic
 {
     func routeToMainWeather()
-    
 }
 
 protocol WeathersInfoDataPassing

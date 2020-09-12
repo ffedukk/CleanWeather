@@ -57,7 +57,7 @@ class WeathersInfoAdditionalInfoCell: WeathersInfoBaseCell {
     
 //    MARK: Logic
     
-    override func setCell(with model: DisplayedViewsForTownProtocol) {
+    override func setCell(with model: WeathersInfoViewModelProtocol) {
         let additionalInfo = model as! WeathersInfoDisplayedAdditionalInfoProtocol
         descriptionLabel.text = additionalInfo.title
         mainInfoLabel.text = additionalInfo.data

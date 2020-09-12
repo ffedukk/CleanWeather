@@ -6,28 +6,18 @@
 //  Copyright © 2020 18592232. All rights reserved.
 //
 
-import UIKit
+import Foundation
+
+protocol WeathersInfoDisplayedTownProtocol: WeathersInfoViewModelProtocol {
+    var icon: String { get  }
+    var displayedViewsForTown: [WeathersInfoViewModelProtocol] { get }
+}
 
 protocol WeathersInfoViewModelProtocol {
     var identifire: String { get }
 }
 
-protocol WeathersInfoDisplayedTownProtocol: WeathersInfoViewModelProtocol {
-    var identifire: String { get }
-    var icon: String { get  }
-    var displayedViewsForTown: [DisplayedViewsForTownProtocol] { get }
-    //var header: WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.Header { get  }
-    //var listOfForecast: WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.DisplayedForecasts { get  }
-    //var additionalInfo: WeathersInfo.FetchWeathers.ViewModel.DisplayedTown.AdditionalInfo { get  }
-}
-
-
-
-protocol DisplayedViewsForTownProtocol {
-    var identifire: String { get }
-}
-
-protocol WeathersInfoDisplayedHeaderProtocol: DisplayedViewsForTownProtocol {
+protocol WeathersInfoDisplayedHeaderProtocol: WeathersInfoViewModelProtocol {
     var placeName: String { get }
     var weatherDescription: String { get }
     var temperature: String { get }
@@ -36,16 +26,16 @@ protocol WeathersInfoDisplayedHeaderProtocol: DisplayedViewsForTownProtocol {
     
 }
 
-protocol WeathersInfoDisplayedForecastsProtocol: DisplayedViewsForTownProtocol {
+protocol WeathersInfoDisplayedForecastsProtocol: WeathersInfoViewModelProtocol {
     var displayedForecast: [WeathersInfoForecastForTimeProtocol] { get }
 }
 
-protocol WeathersInfoDisplayedAdditionalInfoProtocol: DisplayedViewsForTownProtocol {
+protocol WeathersInfoDisplayedAdditionalInfoProtocol: WeathersInfoViewModelProtocol {
     var title: String { get }
     var data: String { get }
 }
 
-protocol WeathersInfoForecastForTimeProtocol: DisplayedViewsForTownProtocol {
+protocol WeathersInfoForecastForTimeProtocol: WeathersInfoViewModelProtocol {
     var time: String { get }
     var temperature: String { get }
     var icon: String { get }
@@ -93,7 +83,7 @@ enum WeathersInfo
                     var title: String
                     var data: String
                 }
-                var displayedViewsForTown: [DisplayedViewsForTownProtocol]
+                var displayedViewsForTown: [WeathersInfoViewModelProtocol]
             }
             var displayedWeathers: [WeathersInfoDisplayedTownProtocol]
         }
