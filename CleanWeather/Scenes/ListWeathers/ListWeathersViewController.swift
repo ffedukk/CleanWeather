@@ -81,7 +81,8 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     //   MARK: Buttons
     
     @objc func addButtonPressed() {
-        interactor?.addWeather(place: "moscow")
+        //interactor?.addWeather(place: "moscow")
+        router?.routeToPlaceSearch()
     }
     
     @objc func editButtonPressed() {

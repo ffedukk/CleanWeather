@@ -12,18 +12,24 @@ enum PlaceSearch
 {
     // MARK: Use cases
     
-    enum FetchWeathers
+    enum FetchPlaces
     {
         struct Request
         {
         }
         struct Response
         {
-            var weathers: [Weather]
+            var places: [Place]
+        }
+        struct Place {
+            var adress: String
         }
         struct ViewModel
         {
-            
+            struct DisplayedAdress {
+                var adress: String
+            }
+            var displayedAdresses: [DisplayedAdress]
         }
         
     }

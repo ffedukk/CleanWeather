@@ -11,6 +11,7 @@ import Foundation
 protocol ListWeathersRoutingLogic
 {
     func routeToMainWeather(selectedCell: Int)
+    func routeToPlaceSearch()
 }
 
 protocol ListWeathersDataPassing
@@ -28,6 +29,17 @@ class ListWeathersRouter: ListWeathersRoutingLogic, ListWeathersDataPassing
         var destinationDS = destinationVC.router!.dataStore!
         passDataToShowOrder(source: dataStore!, destination: &destinationDS)
         navigateToShowOrder(source: viewController!, destination: destinationVC)
+    }
+    
+    func routeToPlaceSearch() {
+        let destinationVC = PlaceSearchViewController()
+        navigateToPlaceSearch(source: viewController!, destination: destinationVC)
+    }
+    
+    func navigateToPlaceSearch(source: ListWeathersViewController, destination: PlaceSearchViewController)
+    {
+        //source.present(destination, animated: true)
+        source.show(destination, sender: nil)
     }
     
     func navigateToShowOrder(source: ListWeathersViewController, destination: WeathersInfoViewController)

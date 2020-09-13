@@ -104,7 +104,7 @@ class WeathersInfoViewController: UICollectionViewController, WeathersInfoDispla
     }
     
     deinit {
-        print("deinit")
+        print("deinit WeathersInfo")
     }
 }
 
