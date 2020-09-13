@@ -19,7 +19,7 @@ class WeathersInfoForecastsCell: WeathersInfoBaseCell {
         return collectionView
     }()
     
-    var displayedForecasts: [WeathersInfoForecastForTimeProtocol] = []
+    var displayedForecasts: [WeathersInfoViewModelProtocol] = []
     
 //    MARK: Init
     

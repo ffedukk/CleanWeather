@@ -8,13 +8,14 @@
 
 import Foundation
 
-protocol WeathersInfoDisplayedTownProtocol: WeathersInfoViewModelProtocol {
-    var icon: String { get  }
-    var displayedViewsForTown: [WeathersInfoViewModelProtocol] { get }
-}
 
 protocol WeathersInfoViewModelProtocol {
     var identifire: String { get }
+}
+
+protocol WeathersInfoDisplayedTownProtocol: WeathersInfoViewModelProtocol {
+    var icon: String { get  }
+    var displayedViewsForTown: [WeathersInfoViewModelProtocol] { get }
 }
 
 protocol WeathersInfoDisplayedHeaderProtocol: WeathersInfoViewModelProtocol {
@@ -23,11 +24,10 @@ protocol WeathersInfoDisplayedHeaderProtocol: WeathersInfoViewModelProtocol {
     var temperature: String { get }
     var temperatureMax: String { get }
     var temperatureMin: String { get }
-    
 }
 
 protocol WeathersInfoDisplayedForecastsProtocol: WeathersInfoViewModelProtocol {
-    var displayedForecast: [WeathersInfoForecastForTimeProtocol] { get }
+    var displayedForecast: [WeathersInfoViewModelProtocol] { get }
 }
 
 protocol WeathersInfoDisplayedAdditionalInfoProtocol: WeathersInfoViewModelProtocol {
@@ -76,7 +76,7 @@ enum WeathersInfo
                         var temperature: String
                         var icon: String
                     }
-                    var displayedForecast: [WeathersInfoForecastForTimeProtocol]
+                    var displayedForecast: [WeathersInfoViewModelProtocol]
                 }
                 struct AdditionalInfo: WeathersInfoDisplayedAdditionalInfoProtocol {
                     var identifire: String = "weathersInfoAdditionalInfoCell"
@@ -85,7 +85,7 @@ enum WeathersInfo
                 }
                 var displayedViewsForTown: [WeathersInfoViewModelProtocol]
             }
-            var displayedWeathers: [WeathersInfoDisplayedTownProtocol]
+            var displayedWeathers: [WeathersInfoViewModelProtocol]
         }
     }
 }
