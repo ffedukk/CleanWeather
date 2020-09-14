@@ -30,6 +30,6 @@ class PlaceSearchPresenter: PlaceSearchPresentationLogic {
             displayedAdresses.append(displayedAdress)
         }
         let viewModel = PlaceSearch.FetchPlaces.ViewModel(displayedAdresses: displayedAdresses)
-        viewController?.displayFetcheSearchResults(viewModel: viewModel)
+        viewController?.displayFetchedSearchResults(viewModel: viewModel)
     }
 }

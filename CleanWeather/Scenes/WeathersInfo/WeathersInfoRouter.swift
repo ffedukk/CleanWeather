@@ -23,16 +23,11 @@ class WeathersInfoRouter: WeathersInfoRoutingLogic, WeathersInfoDataPassing {
     var dataStore: WeathersInfoDataStore?
     
     func routeToMainWeather() {
-
-    }
-    
-    func navigateToShowOrder(source: ListWeathersViewController, destination: WeathersInfoViewController)
-    {
-  
-    }
-    
-    func passDataToShowOrder(source: ListWeathersDataStore, destination: inout WeathersInfoDataStore)
-    {
- 
+        guard let controllers = viewController?.navigationController?.viewControllers else { return }
+        for controller in controllers {
+            if let _ = controller as? ListWeathersViewController {
+                viewController?.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 }

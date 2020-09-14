@@ -53,7 +53,6 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
 //    MARK: Updating
         
     func updateWeathers() {
-        
         locationWorker.startUpdateLocation()
         guard var weathers = weathers, !weathers.isEmpty else { return }
         

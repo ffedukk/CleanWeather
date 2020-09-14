@@ -22,6 +22,8 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     var interactor: ListWeathersBusinessLogic?
     var router: (ListWeathersRoutingLogic & ListWeathersDataPassing)?
     
+    var timer = Timer()
+    
     //    MARK: Init
     
     override init(collectionViewLayout layout: UICollectionViewLayout) {
@@ -53,6 +55,12 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
         collectionView.register(ListWeathersCell.self, forCellWithReuseIdentifier: "listWeathersCell")
         collectionView.register(ListWeathersButtonsCell.self, forCellWithReuseIdentifier: "listWeathersButtonsCell")
         collectionView.register(ListWeathersLocationCell.self, forCellWithReuseIdentifier: "listWeathersLocationCell")
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            self.interactor?.updateWeathers()
+            self.router?.passDataToWeathersInfo()
+        }
     }
     
     //    MARK: Life cycle
@@ -60,15 +68,9 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.fetchWeathersFromCoreData(request: ListWeathers.FetchWeathers.Request())
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //interactor?.updateWeathers()
-        
         interactor?.updateWeathers()
     }
-    
+        
     //    MARK: Display
     
     var displayedItems: [ListWeathersViewModelProtocol] = []
@@ -81,7 +83,6 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     //   MARK: Buttons
     
     @objc func addButtonPressed() {
-        //interactor?.addWeather(place: "moscow")
         router?.routeToPlaceSearch()
     }
     
@@ -101,6 +102,10 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
                 setEditing(false, animated: false)
             }
         }
+    }
+    
+    deinit {
+        print("deinit ListWeathers")
     }
 }
 

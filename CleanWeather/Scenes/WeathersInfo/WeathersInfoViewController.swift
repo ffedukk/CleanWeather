@@ -90,7 +90,6 @@ class WeathersInfoViewController: UICollectionViewController, WeathersInfoDispla
             self.collectionView.scrollToItem(at: IndexPath(item: self.startPosition, section: 0), at: .centeredHorizontally, animated: false)
             self.pageControl.currentPage = self.startPosition
         }
-        
     }
     
     //    MARK: Display

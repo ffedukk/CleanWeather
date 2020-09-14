@@ -13,7 +13,7 @@ import UIKit
 
 protocol PlaceSearchDisplayLogic: class
 {
-    func displayFetcheSearchResults(viewModel: PlaceSearch.FetchPlaces.ViewModel)
+    func displayFetchedSearchResults(viewModel: PlaceSearch.FetchPlaces.ViewModel)
 }
 
 //    MARK: Controller
@@ -21,7 +21,7 @@ protocol PlaceSearchDisplayLogic: class
 class PlaceSearchViewController: UIViewController, PlaceSearchDisplayLogic {
     
     var interactor: PlaceSearchBusinessLogic?
-    var router: (PlaceSearchDataPassing & PlaceSearchRoutingLogic)?
+    var router: PlaceSearchRoutingLogic?
     
     private let searchView = UISearchBar()
     private let resultTableView = UITableView()
@@ -40,7 +40,6 @@ class PlaceSearchViewController: UIViewController, PlaceSearchDisplayLogic {
         interactor.presenter = presenter
         presenter.viewController = viewController
         router.viewController = viewController
-        //router.dataStore = interactor
         
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -69,7 +68,6 @@ class PlaceSearchViewController: UIViewController, PlaceSearchDisplayLogic {
         view.addSubview(resultTableView)
         
         initConstraints()
-        
     }
     
     private func initConstraints() {
@@ -102,7 +100,7 @@ class PlaceSearchViewController: UIViewController, PlaceSearchDisplayLogic {
     
     private var displayedSearchResults = [PlaceSearch.FetchPlaces.ViewModel.DisplayedAdress]()
     
-    func displayFetcheSearchResults(viewModel: PlaceSearch.FetchPlaces.ViewModel) {
+    func displayFetchedSearchResults(viewModel: PlaceSearch.FetchPlaces.ViewModel) {
         displayedSearchResults = viewModel.displayedAdresses
         resultTableView.reloadData()
     }
@@ -116,7 +114,7 @@ class PlaceSearchViewController: UIViewController, PlaceSearchDisplayLogic {
 
 extension PlaceSearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        navigationController?.popViewController(animated: true)
+        router?.routeToListWeathers(with: nil)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -142,9 +140,7 @@ extension PlaceSearchViewController: UITableViewDataSource {
 
 extension PlaceSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let passedData = self.displayedSearchResults[indexPath.row].adress.replacingOccurrences(of: " ", with: "")
-        print(passedData)
-        self.router?.routeToListWeathers(with: passedData)
-        
+        let passedData = displayedSearchResults[indexPath.row].adress.replacingOccurrences(of: " ", with: "")
+        router?.routeToListWeathers(with: passedData)
     }
 }
