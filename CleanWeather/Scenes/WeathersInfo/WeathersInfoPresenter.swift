@@ -10,8 +10,7 @@ import Foundation
 
 //    MARK: Protocols
 
-protocol WeathersInfoPresentationLogic
-{
+protocol WeathersInfoPresentationLogic {
     func presentFetchedWeathers(response: WeathersInfo.FetchWeathers.Response)
 }
 

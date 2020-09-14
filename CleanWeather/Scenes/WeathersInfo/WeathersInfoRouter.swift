@@ -8,13 +8,11 @@
 
 import Foundation
 
-protocol WeathersInfoRoutingLogic
-{
+protocol WeathersInfoRoutingLogic {
     func routeToMainWeather()
 }
 
-protocol WeathersInfoDataPassing
-{
+protocol WeathersInfoDataPassing {
     var dataStore: WeathersInfoDataStore? { get }
 }
 

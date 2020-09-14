@@ -10,8 +10,7 @@ import UIKit
 
 //    MARK: Protocols
 
-protocol WeathersInfoDisplayLogic: class
-{
+protocol WeathersInfoDisplayLogic: class {
     func displayFetchedWeathers(viewModel: WeathersInfo.FetchWeathers.ViewModel)
 }
 

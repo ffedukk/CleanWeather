@@ -10,16 +10,14 @@ import Foundation
 
 //    MARK: Protocols
 
-protocol ListWeathersBusinessLogic
-{
+protocol ListWeathersBusinessLogic {
     func fetchWeathersFromCoreData(request: ListWeathers.FetchWeathers.Request)
     func updateWeathers()
     func addWeather(place: String)
     func deleteWeather(at index: Int)
 }
 
-protocol ListWeathersDataStore
-{
+protocol ListWeathersDataStore {
     var weathers: [Weather]? { get }
 }
 
@@ -54,11 +52,11 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
         
     func updateWeathers() {
         locationWorker.startUpdateLocation()
-        guard var weathers = weathers, !weathers.isEmpty else { return }
+        guard !weathers!.isEmpty else { return }
         
-        for index in 1..<weathers.count {
+        for index in 1..<weathers!.count {
 
-            let place = weathers[index].placeName
+            let place = weathers![index].placeName
             let weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=\(place)&appid=\(weatherAPIKey)"
             let forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=\(place)&appid=\(weatherAPIKey)"
 
@@ -66,7 +64,7 @@ class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, 
                 guard let self = self else { return }
                 self.coreDataWorker.updateItem(weatherData: weatherData, forecastData: forecastData, at: index) { (managedWeather) in
                     if let updatedWeather = Weather(with: managedWeather) {
-                        weathers[index] = updatedWeather
+                        self.weathers![index] = updatedWeather
                     }
                 }
             }

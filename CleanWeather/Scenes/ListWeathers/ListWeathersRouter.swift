@@ -18,8 +18,8 @@ protocol ListWeathersDataPassing {
     func passDataToWeathersInfo()
 }
 
-class ListWeathersRouter: ListWeathersRoutingLogic, ListWeathersDataPassing
-{
+class ListWeathersRouter: ListWeathersRoutingLogic, ListWeathersDataPassing {
+    
     weak var viewController: ListWeathersViewController?
     var dataStore: ListWeathersDataStore?
     

@@ -10,8 +10,7 @@ import Foundation
 
 //    MARK: Protocols
 
-protocol ListWeathersPresentationLogic
-{
+protocol ListWeathersPresentationLogic {
     func presentFetchedWeathers(response: ListWeathers.FetchWeathers.Response)
 }
 
