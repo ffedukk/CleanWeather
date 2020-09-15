@@ -26,14 +26,18 @@ struct Weather {
         var time: String
         var temperature: Double
         var icon: String
-        
-        init(with managedForecast: ManagedForecast) {
-            time = managedForecast.time!
-            temperature = managedForecast.temperature
-            icon = managedForecast.icon!
-        }
     }
-    
+}
+
+extension Weather.Forecast {
+    init(with managedForecast: ManagedForecast) {
+        time = managedForecast.time!
+        temperature = managedForecast.temperature
+        icon = managedForecast.icon!
+    }
+}
+
+extension Weather {
     init?(with managedWeather: ManagedWeather) {
         feelsLike = managedWeather.feelsLike
         placeName = managedWeather.placeName!
