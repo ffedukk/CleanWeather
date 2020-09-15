@@ -25,9 +25,9 @@ class ListWeathersViewController: UICollectionViewController, ListWeathersDispla
     var timer = Timer()
     
     //    MARK: Init
-    
-    override init(collectionViewLayout layout: UICollectionViewLayout) {
-        super.init(collectionViewLayout: layout)
+        
+    init() {
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
         setup()
     }
     

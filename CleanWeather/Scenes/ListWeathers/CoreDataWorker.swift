@@ -9,7 +9,14 @@
 import UIKit
 import CoreData
 
-class CoreDataWorker {
+protocol CoreDataWorkerProtocol {
+    func add(weatherData: [String:Any], forecastData: [[String:Any]], completion: @escaping (ManagedWeather) -> ())
+    func fetch(completion: ([ManagedWeather]) -> ())
+    func deleteFromData(at index: Int, completion: () -> ())
+    func updateItem(weatherData: [String:Any], forecastData: [[String:Any]], at index: Int, completion: (ManagedWeather) -> ())
+}
+
+class CoreDataWorker: CoreDataWorkerProtocol {
     
     weak var coreDataManager = (UIApplication.shared.delegate as! AppDelegate).coreDataManager
     
@@ -21,7 +28,7 @@ class CoreDataWorker {
         guard let coreDataManager = coreDataManager else { return }
         
         let newWeather = ManagedWeather.create(weatherData: weatherData, forecastData: forecastData, managedContext: coreDataManager.persistentContainer.viewContext)
-        
+        print(weatherData, forecastData)
         managedObjects.append(newWeather)
         coreDataManager.saveContext()
         

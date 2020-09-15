@@ -1,0 +1,173 @@
+{
+   "predictins" : [
+      {
+         "description" : "Madrid, Spain",
+         "matched_substrings" : [
+            {
+               "length" : 1,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJgTwKgJcpQg0RaSKMYcHeNsQ",
+         "reference" : "ChIJgTwKgJcpQg0RaSKMYcHeNsQ",
+         "structured_formatting" : {
+            "main_text" : "Madrid",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 1,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Spain"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Madrid"
+            },
+            {
+               "offset" : 8,
+               "value" : "Spain"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
+      },
+      {
+         "description" : "Mumbai, Maharashtra, India",
+         "matched_substrings" : [
+            {
+               "length" : 1,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJwe1EZjDG5zsRaYxkjY_tpF0",
+         "reference" : "ChIJwe1EZjDG5zsRaYxkjY_tpF0",
+         "structured_formatting" : {
+            "main_text" : "Mumbai",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 1,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Maharashtra, India"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Mumbai"
+            },
+            {
+               "offset" : 8,
+               "value" : "Maharashtra"
+            },
+            {
+               "offset" : 21,
+               "value" : "India"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
+      },
+      {
+         "description" : "Muenchen, Germany",
+         "matched_substrings" : [
+            {
+               "length" : 1,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJ2V-Mo_l1nkcRfZixfUq4DAE",
+         "reference" : "ChIJ2V-Mo_l1nkcRfZixfUq4DAE",
+         "structured_formatting" : {
+            "main_text" : "Muenchen",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 1,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Germany"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Muenchen"
+            },
+            {
+               "offset" : 10,
+               "value" : "Germany"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
+      },
+      {
+         "description" : "Marseille, France",
+         "matched_substrings" : [
+            {
+               "length" : 1,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJM1PaREO_yRIRIAKX_aUZCAQ",
+         "reference" : "ChIJM1PaREO_yRIRIAKX_aUZCAQ",
+         "structured_formatting" : {
+            "main_text" : "Marseille",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 1,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "France"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Marseille"
+            },
+            {
+               "offset" : 11,
+               "value" : "France"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
+      },
+      {
+         "description" : "Miami, FL, USA",
+         "matched_substrings" : [
+            {
+               "length" : 1,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJEcHIDqKw2YgRZU-t3XHylv8",
+         "reference" : "ChIJEcHIDqKw2YgRZU-t3XHylv8",
+         "structured_formatting" : {
+            "main_text" : "Miami",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 1,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "FL, USA"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Miami"
+            },
+            {
+               "offset" : 7,
+               "value" : "FL"
+            },
+            {
+               "offset" : 11,
+               "value" : "USA"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
+      }
+   ],
+   "status" : "OK"
+}

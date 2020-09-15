@@ -59,6 +59,7 @@ class JSONWeatherParser: ParserProtocol {
             }
         } catch {
             print("JSON error: \(error.localizedDescription)")
+            return nil
         }
         return result
     }

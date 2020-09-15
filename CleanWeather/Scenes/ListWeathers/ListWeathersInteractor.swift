@@ -30,9 +30,9 @@ protocol ListWeatherLocation: class {
 class ListWeathersInteractor: ListWeathersBusinessLogic, ListWeathersDataStore, ListWeatherLocation {
     
     var presenter: ListWeathersPresentationLogic?
-    var networkWorker = NetworkWorker()
-    var coreDataWorker = CoreDataWorker()
-    var locationWorker = LocationWorker()
+    var networkWorker: ListWeathersNetworkWorkerProtocol = ListWeathersNetworkWorker()
+    var coreDataWorker: CoreDataWorkerProtocol = CoreDataWorker()
+    var locationWorker: LocationWorkerProtocol = LocationWorker()
     
     var weathers: [Weather]?
     

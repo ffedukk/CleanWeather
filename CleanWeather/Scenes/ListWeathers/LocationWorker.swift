@@ -10,7 +10,12 @@ import Foundation
 import MapKit
 import CoreLocation
 
-class LocationWorker: NSObject, CLLocationManagerDelegate {
+protocol LocationWorkerProtocol {
+    var interactor: ListWeatherLocation? { get set }
+    func startUpdateLocation()
+}
+
+class LocationWorker: NSObject, CLLocationManagerDelegate, LocationWorkerProtocol {
     
     weak var interactor: ListWeatherLocation?
     private let locationManager = CLLocationManager()
@@ -35,7 +40,7 @@ class LocationWorker: NSObject, CLLocationManagerDelegate {
         interactor?.addWeatherInLocation(latitude: latitude!, longitude: longitude!)
     }
     
-    func setupLocation() {
+    private func setupLocation() {
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self

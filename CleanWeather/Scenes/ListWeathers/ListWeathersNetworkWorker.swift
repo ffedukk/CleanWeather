@@ -8,7 +8,11 @@
 
 import UIKit
 
-class NetworkWorker {
+protocol ListWeathersNetworkWorkerProtocol {
+    func getWeatherData(weatherURL: String, forecastURL: String, completion: @escaping ([String:Any],[[String:Any]]) -> ())
+}
+
+class ListWeathersNetworkWorker: ListWeathersNetworkWorkerProtocol {
     
     weak var networkManager = (UIApplication.shared.delegate as! AppDelegate).networkManager
     
