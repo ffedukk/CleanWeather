@@ -28,7 +28,6 @@ class CoreDataWorker: CoreDataWorkerProtocol {
         guard let coreDataManager = coreDataManager else { return }
         
         let newWeather = ManagedWeather.create(weatherData: weatherData, forecastData: forecastData, managedContext: coreDataManager.persistentContainer.viewContext)
-        print(weatherData, forecastData)
         managedObjects.append(newWeather)
         coreDataManager.saveContext()
         
