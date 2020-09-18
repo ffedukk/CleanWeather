@@ -8,18 +8,17 @@
 
 import UIKit
 
-class PlaceSearchNetworkWorker {
+protocol PlaceSearchNetworkWorkerProtocol {
+    func getTownPrediction(prediction: String, comletion: @escaping ([String]) -> ())
+}
+
+class PlaceSearchNetworkWorker: PlaceSearchNetworkWorkerProtocol {
     
     weak var networkManager = (UIApplication.shared.delegate as! AppDelegate).networkManager
 
     
     func getTownPrediction(prediction: String, comletion: @escaping ([String]) -> ()) {
-        if prediction.isEmpty {
-            comletion([])
-            return
-        }
-        guard
-            let predictionURL = URL(string: prediction),
+        guard let predictionURL = URL(string: prediction),
                 let networkManager = networkManager
         else { return }
         

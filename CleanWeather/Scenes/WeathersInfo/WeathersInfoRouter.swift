@@ -8,24 +8,11 @@
 
 import Foundation
 
-protocol WeathersInfoRoutingLogic {
-    func routeToMainWeather()
-}
-
 protocol WeathersInfoDataPassing {
     var dataStore: WeathersInfoDataStore? { get }
 }
 
-class WeathersInfoRouter: WeathersInfoRoutingLogic, WeathersInfoDataPassing {
+class WeathersInfoRouter: WeathersInfoDataPassing {
     weak var viewController: WeathersInfoViewController?
     var dataStore: WeathersInfoDataStore?
-    
-    func routeToMainWeather() {
-        guard let controllers = viewController?.navigationController?.viewControllers else { return }
-        for controller in controllers {
-            if let _ = controller as? ListWeathersViewController {
-                viewController?.navigationController?.popViewController(animated: true)
-            }
-        }
-    }
 }

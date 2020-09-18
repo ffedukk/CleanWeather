@@ -15,12 +15,14 @@ protocol PlaceSearchBusinessLogic
   func fetchSearchResults(prediction: String)
 }
 
+
+
 //    MARK: Interactor
 
 class PlaceSearchInteractor: PlaceSearchBusinessLogic {
     
     var presenter: PlaceSearchPresentationLogic?
-    var networkWorker = PlaceSearchNetworkWorker()
+    var networkWorker: PlaceSearchNetworkWorkerProtocol = PlaceSearchNetworkWorker()
     
     let searchAPIKey: String
     

@@ -23,7 +23,7 @@ class JSONWeatherParser: ParserProtocol {
                     result["weatherDescription"] = weatherDescription
                 }
                 
-                guard let mainInfo = json["main"] as? [String:Any] else {fatalError()}
+                guard let mainInfo = json["main"] as? [String:Any] else { return nil }
                 if let temp = mainInfo["temp"] as? Double {
                     result["temp"] = temp
                 }
@@ -40,12 +40,12 @@ class JSONWeatherParser: ParserProtocol {
                     result["pressure"] = pressure
                 }
                 
-                guard let windInfo = json["wind"] as? [String:Any] else {fatalError()}
+                guard let windInfo = json["wind"] as? [String:Any] else { return nil }
                 if let windSpeed = windInfo["speed"] as? Double {
                     result["windSpeed"] = windSpeed
                 }
                 
-                guard let sun = json["sys"] as? [String:Any] else {fatalError()}
+                guard let sun = json["sys"] as? [String:Any] else { return nil }
                 if let sunrise = sun["sunrise"] as? Int {
                     result["sunrise"] = sunrise
                 }

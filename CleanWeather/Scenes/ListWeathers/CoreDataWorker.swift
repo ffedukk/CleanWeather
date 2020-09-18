@@ -18,7 +18,7 @@ protocol CoreDataWorkerProtocol {
 
 class CoreDataWorker: CoreDataWorkerProtocol {
     
-    weak var coreDataManager = (UIApplication.shared.delegate as! AppDelegate).coreDataManager
+    weak var coreDataManager: CoreDataManagerProtocol? = (UIApplication.shared.delegate as! AppDelegate).coreDataManager
     
     var managedObjects: [NSManagedObject] = []
     

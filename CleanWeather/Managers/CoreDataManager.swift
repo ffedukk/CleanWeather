@@ -9,7 +9,12 @@
 import Foundation
 import CoreData
 
-class CoreDataManager {
+protocol CoreDataManagerProtocol: class{
+    var persistentContainer: NSPersistentContainer { get }
+    func saveContext ()
+}
+
+class CoreDataManager: CoreDataManagerProtocol {
     
     // MARK: - Core Data stack
 

@@ -19,7 +19,7 @@ protocol WeathersInfoDisplayLogic: class {
 class WeathersInfoViewController: UICollectionViewController, WeathersInfoDisplayLogic {
     
     var interactor: WeathersInfoBusinessLogic?
-    var router: (WeathersInfoRoutingLogic & WeathersInfoDataPassing)?
+    var router: WeathersInfoDataPassing?
     
     let pageControl = UIPageControl()
     let startPosition: Int

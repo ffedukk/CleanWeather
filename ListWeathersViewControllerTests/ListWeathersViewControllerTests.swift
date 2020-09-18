@@ -54,8 +54,6 @@ class ListWeathersRouterSpy: ListWeathersRoutingLogic, ListWeathersDataPassing {
     func passDataToWeathersInfo() {
         passDataToWeathersInfoCalled += 1
     }
-    
-    
 }
 
 class ListWeathersViewControllerTests: XCTestCase {
