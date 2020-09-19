@@ -12,8 +12,9 @@ class ListWeathersButtonsCell: ListWeathersBaseCell {
     
     private let addButton = UIButton(type: .contactAdd)
     private let editButton = UIButton()
-    private let deleteButton = UIButton(type: .infoLight)
-
+    //private let deleteButton = UIButton(type: .infoLight)
+    private let deleteButton = UIButton()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -37,6 +38,7 @@ class ListWeathersButtonsCell: ListWeathersBaseCell {
         addSubview(editButton)
         editButton.addTarget(nil, action: Selector(("editButtonPressed")), for: .touchUpInside)
         
+        deleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(deleteButton)
         deleteButton.addTarget(nil, action: Selector(("deleteButtonPressed")), for: .touchUpInside)

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-protocol CoreDataManagerProtocol: class{
+protocol CoreDataManagerProtocol: AnyObject {
     var persistentContainer: NSPersistentContainer { get }
     func saveContext ()
 }
