@@ -23,10 +23,13 @@ class PlaceSearchInteractor: PlaceSearchBusinessLogic {
     
     var presenter: PlaceSearchPresentationLogic?
     var networkWorker: PlaceSearchNetworkWorkerProtocol = PlaceSearchNetworkWorker()
+    let additionalQueue = OperationQueue()
     
     let searchAPIKey: String
     
     func fetchSearchResults(prediction: String) {
+        
+        additionalQueue.cancelAllOperations()
         
         let URL = "https://maps.googleapis.com/maps/api/place/autocomplete/json?location&input=\(prediction)&key=\(searchAPIKey)&language=en"
         
@@ -38,14 +41,31 @@ class PlaceSearchInteractor: PlaceSearchBusinessLogic {
             return
         }
         
-        networkWorker.getTownPrediction(prediction: URL) { (results) in
-            for adress in results {
+        let operation = PlaceSearchNetworkOperation(prediction: URL)
+        operation.completionBlock = {
+            print("complition block")
+            guard let result = operation.result else { print("cancel");return }
+            for adress in result {
                 let place = PlaceSearch.FetchPlaces.Place(adress: adress)
                 places.append(place)
             }
             let response = PlaceSearch.FetchPlaces.Response(places: places)
-            self.presenter?.presentFetchedPlaces(response: response)
+            OperationQueue.main.addOperation {
+                self.presenter?.presentFetchedPlaces(response: response)
+            }
         }
+        additionalQueue.addOperation(operation)
+        
+        
+        
+//        networkWorker.getTownPrediction(prediction: URL) { (results) in
+//            for adress in results {
+//                let place = PlaceSearch.FetchPlaces.Place(adress: adress)
+//                places.append(place)
+//            }
+//            let response = PlaceSearch.FetchPlaces.Response(places: places)
+//            self.presenter?.presentFetchedPlaces(response: response)
+//        }
     }
     
     init() {

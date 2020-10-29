@@ -16,6 +16,7 @@ class NetworkManager {
         
         session.dataTask(with: url) { (data, response, error) in
             completion(Result {
+                print("net")
                 if let err = error { throw err }
                 guard let data = data else { throw networkError.NoDataError }
                 guard let parsedData = parser.parse(data) else { throw networkError.ParseError }

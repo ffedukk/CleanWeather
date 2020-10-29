@@ -128,7 +128,7 @@ extension WeathersInfoViewController {
         return 0
     }
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        pageControl.currentPage = Int(targetContentOffset.pointee.x / view.frame.width)
+        pageControl.currentPage = Int(targetContentOffset.pointee.x / view.frame.size.width)
     }
 }
 
@@ -138,7 +138,7 @@ extension WeathersInfoViewController {
 
 extension WeathersInfoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
     }
 }
 

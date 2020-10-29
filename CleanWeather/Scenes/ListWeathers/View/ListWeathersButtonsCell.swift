@@ -12,7 +12,6 @@ class ListWeathersButtonsCell: ListWeathersBaseCell {
     
     private let addButton = UIButton(type: .contactAdd)
     private let editButton = UIButton()
-    //private let deleteButton = UIButton(type: .infoLight)
     private let deleteButton = UIButton()
     
     override init(frame: CGRect) {
